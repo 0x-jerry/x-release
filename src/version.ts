@@ -2,7 +2,7 @@ import prompts, { Choice } from 'prompts'
 import semver, { ReleaseType } from 'semver'
 import assert from 'assert'
 
-const releaseTypes: ReleaseType[] = [
+export const releaseTypes: ReleaseType[] = [
   'patch',
   'minor',
   'major',

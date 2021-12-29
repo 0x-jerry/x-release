@@ -1,5 +1,5 @@
 import { CommandInstall, ReleaseContext, ReleaseTask } from './_types'
-import { resolveVersion } from '../version'
+import { releaseTypes, resolveVersion } from '../version'
 import { readPackage } from '../package'
 import { InternalReleaseTask, internalTasks, isInternalTask } from '../internalReleaseTask'
 import { run } from '../run'
@@ -30,11 +30,12 @@ interface ReleaseOption {
 }
 
 async function action(version: string, opt: ReleaseOption = {}) {
-  const releaseType = Object.keys(opt).filter(
-    (key) =>
-      // @ts-expect-error
-      !!opt[key]
+  const releaseType = Object.keys(opt).filter((key) =>
+    // @ts-expect-error
+    releaseTypes.includes(key)
   )[0]
+
+  logger.log('releaseType: %s', releaseType)
 
   try {
     const pkg = await readPackage()
