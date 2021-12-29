@@ -11,5 +11,5 @@ export async function getConf() {
     ],
   })
 
-  return res.config
+  return res.config || {}
 }
