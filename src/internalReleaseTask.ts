@@ -1,12 +1,19 @@
 import { ReleaseTaskRunner } from './commands/_types'
+import fs from 'fs/promises'
+import path from 'path'
+import { readPackage } from './package'
 
 export enum InternalReleaseTask {
   publishToNpm = 'internal:publishToNpm',
   syncToGit = 'internal:syncToGit',
+  updatePackageVersion = 'internal: updatePackageVersion',
 }
 
 export function isInternalTask(task: string): task is InternalReleaseTask {
-  return !!Object.keys(InternalReleaseTask).includes(task)
+  const keys = Object.values(InternalReleaseTask)
+
+  // @ts-expect-error
+  return keys.includes(task)
 }
 
 export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
@@ -22,5 +29,14 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
 
     await ctx.run(`git tag v${ctx.nextVersion}`)
     await ctx.run(`git push && git push --tags`)
+  },
+  async [InternalReleaseTask.updatePackageVersion](ctx) {
+    const pkg = await readPackage()
+    pkg.version = ctx.nextVersion
+
+    const cwd = process.cwd()
+    const pkgFile = path.join(cwd, 'package.json')
+
+    await fs.writeFile(pkgFile, JSON.stringify(pkg, null, 2))
   },
 }

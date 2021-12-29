@@ -3,8 +3,7 @@ import { resolveVersion } from '../version'
 import { error, log, warn } from '../dev'
 import { readPackage } from '../package'
 import { InternalReleaseTask, internalTasks, isInternalTask } from '../internalReleaseTask'
-// import { exec } from 'child_process'
-import { execa } from 'execa'
+import execa from 'execa'
 import { getConf } from '../config'
 
 export const install: CommandInstall = (cac) => {
@@ -88,6 +87,8 @@ async function runTasks(ctx: ReleaseContext, tasks: ReleaseTask[]) {
 }
 
 async function run(cmd: string) {
+  console.log('$', cmd)
+
   const [bin, ...args] = cmd.split(/\s+/g)
   await execa(bin, args, { stdio: 'pipe' })
 }
