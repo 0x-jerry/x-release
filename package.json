@@ -8,6 +8,10 @@
   "bin": {
     "x-release": "./cli.js"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "scripts": {
     "dev": "node dev.js",
     "release": "node cli.js"
