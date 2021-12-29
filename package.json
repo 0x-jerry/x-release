@@ -1,12 +1,12 @@
 {
-  "name": "tpl-node-cli",
-  "description": "Fast way to build node CLI application without bundle",
+  "name": "@0x-jerry/x-release",
+  "description": "A convenient tool that helps you to create a new release.",
   "version": "0.0.1",
   "main": "src/export.ts",
   "types": "src/export.ts",
   "license": "MIT",
   "bin": {
-    "x-cli": "./cli.js"
+    "x-release": "./cli.js"
   },
   "scripts": {
     "dev": "node dev.js",
@@ -15,12 +15,20 @@
   },
   "dependencies": {
     "cac": "^6.7.12",
+    "debug": "^4.3.3",
     "esbuild": "^0.14.9",
-    "esbuild-register": "^3.3.1"
+    "esbuild-register": "^3.3.1",
+    "execa": "^6.0.0",
+    "prompts": "^2.4.2",
+    "semver": "^7.3.5",
+    "unconfig": "^0.2.2"
   },
   "devDependencies": {
     "@exyz/glib": "^0.4.4",
+    "@types/debug": "^4.1.7",
     "@types/jest": "^27.0.3",
+    "@types/prompts": "^2.0.14",
+    "@types/semver": "^7.3.9",
     "jest": "^27.4.5",
     "ts-jest": "^27.1.2",
     "typescript": "^4.5.4"
