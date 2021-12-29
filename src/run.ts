@@ -1,8 +1,8 @@
 import execa from 'execa'
-import { gray } from 'picocolors'
+import pc from 'picocolors'
 
 export async function run(cmd: string) {
-  console.log(gray('$'), gray(cmd))
+  console.log(pc.dim('$'), pc.dim(cmd))
 
   await execa('sh', ['-c', cmd], { stdio: 'pipe' })
 }

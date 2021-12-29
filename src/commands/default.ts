@@ -53,6 +53,7 @@ async function action(version: string, opt: ReleaseOption = {}) {
       'test',
       'build',
       'changelog',
+      InternalReleaseTask.updatePackageVersion,
       InternalReleaseTask.syncToGit,
       InternalReleaseTask.publishToNpm,
     ]
