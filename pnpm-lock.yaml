@@ -10,7 +10,7 @@ specifiers:
   debug: ^4.3.3
   esbuild: ^0.14.9
   esbuild-register: ^3.3.1
-  execa: ^6.0.0
+  execa: ^5.1.1
   jest: ^27.4.5
   prompts: ^2.4.2
   semver: ^7.3.5
@@ -23,7 +23,7 @@ dependencies:
   debug: registry.npmmirror.com/debug/4.3.3
   esbuild: registry.npmmirror.com/esbuild/0.14.9
   esbuild-register: registry.npmmirror.com/esbuild-register/3.3.1_esbuild@0.14.9
-  execa: registry.npmmirror.com/execa/6.0.0
+  execa: registry.npmmirror.com/execa/5.1.1
   prompts: registry.npmmirror.com/prompts/2.4.2
   semver: registry.nlark.com/semver/7.3.5
   unconfig: registry.npmmirror.com/unconfig/0.2.2
@@ -746,14 +746,6 @@ packages:
     name: human-signals
     version: 2.1.0
     engines: {node: '>=10.17.0'}
-    dev: true
-
-  registry.nlark.com/human-signals/3.0.1:
-    resolution: {integrity: sha1-x0CSCFna+lDloyItqdO/S7Dl7vU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/human-signals/download/human-signals-3.0.1.tgz}
-    name: human-signals
-    version: 3.0.1
-    engines: {node: '>=12.20.0'}
-    dev: false
 
   registry.nlark.com/iconv-lite/0.4.24:
     resolution: {integrity: sha1-ICK0sl+93CHS9SSXSkdKr+czkIs=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/iconv-lite/download/iconv-lite-0.4.24.tgz}
@@ -818,14 +810,6 @@ packages:
     name: is-stream
     version: 2.0.1
     engines: {node: '>=8'}
-    dev: true
-
-  registry.nlark.com/is-stream/3.0.0:
-    resolution: {integrity: sha1-5r/XqmvvafT0cs6btoHj5XtDGaw=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/is-stream/download/is-stream-3.0.0.tgz}
-    name: is-stream
-    version: 3.0.0
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dev: false
 
   registry.nlark.com/is-typedarray/1.0.0:
     resolution: {integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/is-typedarray/download/is-typedarray-1.0.0.tgz}
@@ -948,14 +932,6 @@ packages:
     name: mimic-fn
     version: 2.1.0
     engines: {node: '>=6'}
-    dev: true
-
-  registry.nlark.com/mimic-fn/4.0.0:
-    resolution: {integrity: sha1-YKkFUNXLCyOcymXYk7GlOymHHsw=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/mimic-fn/download/mimic-fn-4.0.0.tgz}
-    name: mimic-fn
-    version: 4.0.0
-    engines: {node: '>=12'}
-    dev: false
 
   registry.nlark.com/minimatch/3.0.4:
     resolution: {integrity: sha1-UWbihkV/AzBgZL5Ul+jbsMPTIIM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/minimatch/download/minimatch-3.0.4.tgz}
@@ -1011,16 +987,6 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       mimic-fn: registry.nlark.com/mimic-fn/2.1.0
-    dev: true
-
-  registry.nlark.com/onetime/6.0.0:
-    resolution: {integrity: sha1-fCTBjtH9LpvKS9JoBqM2E8d9NLQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/onetime/download/onetime-6.0.0.tgz}
-    name: onetime
-    version: 6.0.0
-    engines: {node: '>=12'}
-    dependencies:
-      mimic-fn: registry.nlark.com/mimic-fn/4.0.0
-    dev: false
 
   registry.nlark.com/optionator/0.8.3:
     resolution: {integrity: sha1-hPodA2/p08fiHZmIS2ARZ+yPtJU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/optionator/download/optionator-0.8.3.tgz}
@@ -1079,13 +1045,6 @@ packages:
     name: path-key
     version: 3.1.1
     engines: {node: '>=8'}
-
-  registry.nlark.com/path-key/4.0.0:
-    resolution: {integrity: sha1-KVWI3DruZBVPh3rbnXgLgcVUvxg=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/path-key/download/path-key-4.0.0.tgz}
-    name: path-key
-    version: 4.0.0
-    engines: {node: '>=12'}
-    dev: false
 
   registry.nlark.com/path-parse/1.0.7:
     resolution: {integrity: sha1-+8EUtgykKzDZ2vWFjkvWi77bZzU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/path-parse/download/path-parse-1.0.7.tgz}
@@ -1258,14 +1217,6 @@ packages:
     name: strip-final-newline
     version: 2.0.0
     engines: {node: '>=6'}
-    dev: true
-
-  registry.nlark.com/strip-final-newline/3.0.0:
-    resolution: {integrity: sha1-UolMMT+/8xiDUoCu1g/3Hr8SuP0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/strip-final-newline/download/strip-final-newline-3.0.0.tgz}
-    name: strip-final-newline
-    version: 3.0.0
-    engines: {node: '>=12'}
-    dev: false
 
   registry.nlark.com/supports-hyperlinks/2.2.0:
     resolution: {integrity: sha1-T3e0JIh2WJF3S3DHm6vYf5vVlLs=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/supports-hyperlinks/download/supports-hyperlinks-2.2.0.tgz}
@@ -2634,24 +2585,6 @@ packages:
       onetime: registry.nlark.com/onetime/5.1.2
       signal-exit: registry.npmmirror.com/signal-exit/3.0.6
       strip-final-newline: registry.nlark.com/strip-final-newline/2.0.0
-    dev: true
-
-  registry.npmmirror.com/execa/6.0.0:
-    resolution: {integrity: sha512-m4wU9j4Z9nXXoqT8RSfl28JSwmMNLFF69OON8H/lL3NeU0tNpGz313bcOfYoBBHokB0dC2tMl3VUcKgHELhL2Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/execa/download/execa-6.0.0.tgz?cache=0&sync_timestamp=1637147768929&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fexeca%2Fdownload%2Fexeca-6.0.0.tgz}
-    name: execa
-    version: 6.0.0
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dependencies:
-      cross-spawn: registry.nlark.com/cross-spawn/7.0.3
-      get-stream: registry.nlark.com/get-stream/6.0.1
-      human-signals: registry.nlark.com/human-signals/3.0.1
-      is-stream: registry.nlark.com/is-stream/3.0.0
-      merge-stream: registry.nlark.com/merge-stream/2.0.0
-      npm-run-path: registry.npmmirror.com/npm-run-path/5.0.1
-      onetime: registry.nlark.com/onetime/6.0.0
-      signal-exit: registry.npmmirror.com/signal-exit/3.0.6
-      strip-final-newline: registry.nlark.com/strip-final-newline/3.0.0
-    dev: false
 
   registry.npmmirror.com/expect/27.4.2:
     resolution: {integrity: sha512-BjAXIDC6ZOW+WBFNg96J22D27Nq5ohn+oGcuP2rtOtcjuxNoV9McpQ60PcQWhdFOSBIQdR72e+4HdnbZTFSTyg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/expect/download/expect-27.4.2.tgz}
@@ -3450,16 +3383,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-key: registry.nlark.com/path-key/3.1.1
-    dev: true
-
-  registry.npmmirror.com/npm-run-path/5.0.1:
-    resolution: {integrity: sha1-dI3WjtfeN3ux9xMsfa/mV75atAA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/npm-run-path/download/npm-run-path-5.0.1.tgz}
-    name: npm-run-path
-    version: 5.0.1
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dependencies:
-      path-key: registry.nlark.com/path-key/4.0.0
-    dev: false
 
   registry.npmmirror.com/p-try/2.2.0:
     resolution: {integrity: sha1-yyhoVA4xPWHeWPr741zpAE1VQOY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/p-try/download/p-try-2.2.0.tgz}

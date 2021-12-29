@@ -18,7 +18,7 @@
     "debug": "^4.3.3",
     "esbuild": "^0.14.9",
     "esbuild-register": "^3.3.1",
-    "execa": "^6.0.0",
+    "execa": "^5.1.1",
     "prompts": "^2.4.2",
     "semver": "^7.3.5",
     "unconfig": "^0.2.2"
