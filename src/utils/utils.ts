@@ -4,7 +4,7 @@ import path from 'path'
 export function requireAll<T>(dir: string, exclude?: (filename: string) => boolean) {
   const files = fs.readdirSync(dir)
 
-  const modules: T[] = []
+  const modules: { name: string; module: T }[] = []
   for (const file of files) {
     if (!file.endsWith('.ts') || (exclude && exclude(file))) {
       continue
@@ -14,7 +14,10 @@ export function requireAll<T>(dir: string, exclude?: (filename: string) => boole
 
     const module = require(filePath) as T
 
-    modules.push(module)
+    modules.push({
+      name: file,
+      module,
+    })
   }
 
   return modules

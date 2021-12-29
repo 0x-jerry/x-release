@@ -1,10 +1,10 @@
 import { CommandInstall, ReleaseContext, ReleaseTask } from './_types'
 import { resolveVersion } from '../version'
-import { error, log, warn } from '../dev'
 import { readPackage } from '../package'
 import { InternalReleaseTask, internalTasks, isInternalTask } from '../internalReleaseTask'
-import { getConf } from '../config'
 import { run } from '../run'
+import { logger } from '../utils/dev'
+import { getConf } from '../modules/config'
 
 export const install: CommandInstall = (cac) => {
   // default command
@@ -40,7 +40,7 @@ async function action(version: string, opt: ReleaseOption = {}) {
     const pkg = await readPackage()
 
     const nextVersion = await resolveVersion(pkg.version, releaseType, version)
-    log('next version is: %s', nextVersion)
+    logger.log('next version is: %s', nextVersion)
 
     const ctx: ReleaseContext = {
       package: pkg,
@@ -64,7 +64,7 @@ async function action(version: string, opt: ReleaseOption = {}) {
 
     await runTasks(ctx, tasks)
   } catch (err) {
-    error('%s', err)
+    logger.error('%s', err)
     return
   }
 }
@@ -79,7 +79,7 @@ async function runTasks(ctx: ReleaseContext, tasks: ReleaseTask[]) {
       } else if (scripts[task]) {
         await ctx.run(`yarn run ${task}`)
       } else {
-        warn(`Can't found task %s`, task)
+        logger.warn(`Can't found task %s`, task)
       }
     } else {
       await task(ctx)

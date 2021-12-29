@@ -2,7 +2,9 @@
 
 import { UserConfig } from './types'
 
-export { UserConfig }
+import { InternalReleaseTask } from './internalReleaseTask'
+
+export { UserConfig, InternalReleaseTask }
 
 export function defineConfig(conf: UserConfig) {
   return conf

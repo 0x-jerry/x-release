@@ -11,6 +11,8 @@ export function createLogger(ns?: string) {
   return debug(`${name}:${ns}`)
 }
 
-export const log = createLogger()
-export const warn = createLogger('warn')
-export const error = createLogger('error')
+export const logger = {
+  log: createLogger(),
+  warn: createLogger('warn'),
+  error: createLogger('error'),
+}

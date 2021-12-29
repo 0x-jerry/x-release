@@ -2,8 +2,9 @@ import { CAC } from 'cac'
 import assert from 'assert'
 import pkg from '../package.json'
 import path from 'path'
-import { requireAll } from './utils'
 import { CommandMod } from './commands/_types'
+import { logger } from './utils/dev'
+import { requireAll } from './utils/utils'
 
 const name = Object.keys(pkg.bin || {})[0]
 assert(name, 'Please fill bin property in package.json.')
@@ -19,7 +20,9 @@ const mods = requireAll<CommandMod>(path.join(__dirname, 'commands'), (name) =>
 )
 
 for (const mod of mods) {
-  mod.install(cli)
+  logger.log('install module: %s', mod.name)
+
+  mod.module.install(cli)
 }
 
 cli.parse()

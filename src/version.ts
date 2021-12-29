@@ -1,7 +1,6 @@
 import prompts, { Choice } from 'prompts'
 import semver, { ReleaseType } from 'semver'
 import assert from 'assert'
-import { log } from './dev'
 
 const releaseTypes: ReleaseType[] = [
   'patch',

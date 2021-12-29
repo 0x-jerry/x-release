@@ -1,4 +1,4 @@
-import pkg from '../package.json'
+import pkg from '../../package.json'
 import assert from 'assert'
 
 export function cliName() {
