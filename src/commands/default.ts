@@ -50,8 +50,8 @@ async function action(version: string, opt: ReleaseOption = {}) {
 
     // default tasks
     const defaultTasks: ReleaseTask[] = [
-      'test',
-      'build',
+      'script:test',
+      'script:build',
       InternalReleaseTask.updatePkg,
       InternalReleaseTask.commit,
       InternalReleaseTask.tag,
@@ -77,7 +77,11 @@ async function runTasks(ctx: ReleaseContext, tasks: ReleaseTask[]) {
     if (typeof task === 'string') {
       if (isInternalTask(task)) {
         await internalTasks[task](ctx)
-      } else if (scripts[task]) {
+      } else if (task.startsWith('run:')) {
+        // check run:xxxx
+        await ctx.run(task.slice('run:'.length).trim())
+      } else if (task.startsWith('script:') && scripts[task.slice('script:'.length)]) {
+        // check script:xxx
         await ctx.run(`yarn run ${task}`)
       } else {
         logger.warn(`Can't found task %s`, task)

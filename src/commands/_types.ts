@@ -19,4 +19,14 @@ export interface ReleaseTaskRunner {
   (ctx: ReleaseContext): void | Promise<void>
 }
 
-export type ReleaseTask = InternalReleaseTask | string | ReleaseTaskRunner
+/**
+ *  - `script:xxx` will run package.scripts.xxx
+ *  - `run: echo "hello"` will run echo "hello"
+ */
+export type ReleaseStringTask = `script:${string}` | `run:${string}` | `${InternalReleaseTask}`
+
+/**
+ *  - `script:xxx` will run package.scripts.xxx
+ *  - `run: echo "hello"` will run echo "hello"
+ */
+export type ReleaseTask = InternalReleaseTask | ReleaseStringTask | ReleaseTaskRunner
