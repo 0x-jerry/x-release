@@ -4,9 +4,11 @@ import path from 'path'
 import { readPackage } from './package'
 
 export enum InternalReleaseTask {
-  publishToNpm = 'internal:publishToNpm',
-  syncToGit = 'internal:syncToGit',
-  updatePackageVersion = 'internal: updatePackageVersion',
+  updatePkg = 'pkg.update.version',
+  publish = 'npm.publish',
+  commit = 'git.commit',
+  tag = 'git.tag',
+  push = 'git.push',
 }
 
 export function isInternalTask(task: string): task is InternalReleaseTask {
@@ -17,20 +19,23 @@ export function isInternalTask(task: string): task is InternalReleaseTask {
 }
 
 export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
-  async [InternalReleaseTask.publishToNpm](ctx) {
+  async [InternalReleaseTask.publish](ctx) {
     await ctx.run(`yarn publish --new-version ${ctx.nextVersion}`)
   },
-  async [InternalReleaseTask.syncToGit](ctx) {
+  async [InternalReleaseTask.commit](ctx) {
     await ctx.run('git add .')
 
     const commitMsg = `chore: release v${ctx.nextVersion}`
 
     await ctx.run(`git commit -m ${JSON.stringify(commitMsg)}`)
-
+  },
+  async [InternalReleaseTask.tag](ctx) {
     await ctx.run(`git tag v${ctx.nextVersion}`)
+  },
+  async [InternalReleaseTask.push](ctx) {
     await ctx.run(`git push && git push --tags`)
   },
-  async [InternalReleaseTask.updatePackageVersion](ctx) {
+  async [InternalReleaseTask.updatePkg](ctx) {
     const pkg = await readPackage()
     pkg.version = ctx.nextVersion
 

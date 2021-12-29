@@ -52,10 +52,11 @@ async function action(version: string, opt: ReleaseOption = {}) {
     const defaultTasks: ReleaseTask[] = [
       'test',
       'build',
-      'changelog',
-      InternalReleaseTask.updatePackageVersion,
-      InternalReleaseTask.syncToGit,
-      InternalReleaseTask.publishToNpm,
+      InternalReleaseTask.updatePkg,
+      InternalReleaseTask.commit,
+      InternalReleaseTask.tag,
+      InternalReleaseTask.push,
+      InternalReleaseTask.publish,
     ]
 
     const conf = await getConf()
