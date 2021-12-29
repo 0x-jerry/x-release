@@ -10,6 +10,7 @@ specifiers:
   esbuild: ^0.14.9
   esbuild-register: ^3.3.1
   execa: ^5.1.1
+  picocolors: ^1.0.0
   prompts: ^2.4.2
   semver: ^7.3.5
   typescript: ^4.5.4
@@ -21,6 +22,7 @@ dependencies:
   esbuild: registry.npmmirror.com/esbuild/0.14.9
   esbuild-register: registry.npmmirror.com/esbuild-register/3.3.1_esbuild@0.14.9
   execa: registry.npmmirror.com/execa/5.1.1
+  picocolors: registry.npmmirror.com/picocolors/1.0.0
   prompts: registry.npmmirror.com/prompts/2.4.2
   semver: registry.nlark.com/semver/7.3.5
   unconfig: registry.npmmirror.com/unconfig/0.2.2
@@ -641,6 +643,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-key: registry.nlark.com/path-key/3.1.1
+    dev: false
+
+  registry.npmmirror.com/picocolors/1.0.0:
+    resolution: {integrity: sha1-y1vcdP8/UYkiNur3nWi8RFZKuBw=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/picocolors/download/picocolors-1.0.0.tgz}
+    name: picocolors
+    version: 1.0.0
     dev: false
 
   registry.npmmirror.com/pretty-format/27.4.2:
