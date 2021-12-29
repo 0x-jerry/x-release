@@ -10,8 +10,7 @@
   },
   "scripts": {
     "dev": "node dev.js",
-    "release": "glib release",
-    "test": "jest"
+    "release": "node cli.js"
   },
   "dependencies": {
     "cac": "^6.7.12",
@@ -24,13 +23,10 @@
     "unconfig": "^0.2.2"
   },
   "devDependencies": {
-    "@exyz/glib": "^0.4.4",
     "@types/debug": "^4.1.7",
     "@types/jest": "^27.0.3",
     "@types/prompts": "^2.0.14",
     "@types/semver": "^7.3.9",
-    "jest": "^27.4.5",
-    "ts-jest": "^27.1.2",
     "typescript": "^4.5.4"
   }
 }
