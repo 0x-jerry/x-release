@@ -1,6 +1,6 @@
 # X-Release
 
-A tool that help you to quickly create a new release.
+A tool that helps you to create a new release quickly.
 
 ## Usage
 
