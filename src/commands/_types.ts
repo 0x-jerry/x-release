@@ -28,7 +28,7 @@ export const ExecScriptPrefix = 'run:'
  */
 export type ReleaseStringTask =
   | `${typeof NpmScriptPrefix}${string}`
-  | `${typeof ExecScriptPrefix}:${string}`
+  | `${typeof ExecScriptPrefix}${string}`
   | `${InternalReleaseTask}`
 
 /**
