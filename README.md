@@ -71,6 +71,12 @@ export default defineConfig({
     'git.push', // execute git push && git push --tags
     'npm:build', // execute npm run build
     'npm.publish', // execute npm publish --tag ${new-version}
+    'run:echo "custom task"', // execute echo "custom task"
+    async (ctx) => {
+      console.log('new version is:', ctx.nextVersion)
+
+      await ctx.run(`echo "custom script, all tasks are finished!"`)
+    },
   ],
 })
 ```
