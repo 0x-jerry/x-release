@@ -19,11 +19,17 @@ export interface ReleaseTaskRunner {
   (ctx: ReleaseContext): void | Promise<void>
 }
 
+export const NpmScriptPrefix = 'npm:'
+export const ExecScriptPrefix = 'run:'
+
 /**
  *  - `script:xxx` will run package.scripts.xxx
  *  - `run: echo "hello"` will run echo "hello"
  */
-export type ReleaseStringTask = `script:${string}` | `run:${string}` | `${InternalReleaseTask}`
+export type ReleaseStringTask =
+  | `${typeof NpmScriptPrefix}${string}`
+  | `${typeof ExecScriptPrefix}:${string}`
+  | `${InternalReleaseTask}`
 
 /**
  *  - `script:xxx` will run package.scripts.xxx
