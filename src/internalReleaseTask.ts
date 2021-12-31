@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import { readPackage } from './package'
 import { getConf } from './modules/config'
+import { renderString } from './utils/renderString'
 
 export enum InternalReleaseTask {
   updatePkg = 'pkg.update.version',
@@ -55,11 +56,4 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
 
     await fs.writeFile(pkgFile, JSON.stringify(pkg, null, 2))
   },
-}
-
-function renderString(str: string, data: Record<string, string>) {
-  return str.replace(/\$\{[^}]+\}/, (item) => {
-    const key = item.slice(2, -1)
-    return data[key] || ''
-  })
 }
