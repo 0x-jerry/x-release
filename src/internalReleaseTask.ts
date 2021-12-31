@@ -29,7 +29,7 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
 
     const conf = await getConf()
 
-    const commitTpl = conf.commit || 'chore: release v${version}'
+    const commitTpl = ctx.options.commit || conf.commit || 'chore: release v${version}'
 
     const commit = renderString(commitTpl, { version: ctx.nextVersion })
 
@@ -38,7 +38,7 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
   async [InternalReleaseTask.tag](ctx) {
     const conf = await getConf()
 
-    const tagTpl = conf.tag || 'v${version}'
+    const tagTpl = ctx.options.tag || conf.tag || 'v${version}'
 
     const tag = renderString(tagTpl, { version: ctx.nextVersion })
 
