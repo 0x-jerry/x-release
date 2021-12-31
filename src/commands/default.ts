@@ -95,6 +95,7 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
     const defaultTasks: ReleaseTask[] = [
       'npm:test',
       InternalReleaseTask.updatePkg,
+      'npm:changelog',
       InternalReleaseTask.commit,
       InternalReleaseTask.tag,
       InternalReleaseTask.push,
