@@ -4,7 +4,6 @@ import path from 'path'
 import { readPackage } from './package'
 import { getConf } from './modules/config'
 import { renderString } from './utils/renderString'
-import { detectNpmTool } from './utils/npmTool'
 
 export enum InternalReleaseTask {
   updatePkg = 'pkg.update.version',
@@ -23,7 +22,7 @@ export function isInternalTask(task: string): task is InternalReleaseTask {
 
 export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
   async [InternalReleaseTask.publish](ctx) {
-    await ctx.run(`${detectNpmTool()} publish`)
+    await ctx.runNpm('publish')
   },
   async [InternalReleaseTask.commit](ctx) {
     await ctx.run('git add .')

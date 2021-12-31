@@ -3,6 +3,7 @@ import {
   ExecScriptPrefix,
   NpmScriptPrefix,
   ReleaseContext,
+  ReleaseOption,
   ReleaseTask,
 } from './_types'
 import { releaseTypes, resolveVersion } from '../version'
@@ -53,17 +54,13 @@ export const install: CommandInstall = (cac) => {
     .option('--preminor', 'auto-increment preminor version number')
     .option('--premajor', 'auto-increment premajor version number')
     .option('--prerelease', 'auto-increment prerelease version number')
+    .option('--tag <tag-tpl>', 'new tag format, default is: "v${version}"')
+    .option(
+      '--commit <commit-tpl>',
+      'the commit message template, default is: "chore: release v${version}"'
+    )
+    .option('--npm <npm-tool>', 'specified npm manager tool, default will check lockfile')
     .action(action)
-}
-
-interface ReleaseOption {
-  major?: boolean
-  minor?: boolean
-  premajor?: boolean
-  preminor?: boolean
-  prerelase?: boolean
-  prerelease?: boolean
-  newVersion?: string
 }
 
 async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
@@ -85,8 +82,13 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
 
     const ctx: ReleaseContext = {
       package: pkg,
+      options: opt,
       nextVersion,
       run,
+      runNpm(cmd) {
+        const tool = opt.npm || detectNpmTool()
+        return run(`${tool} ${cmd}`)
+      },
     }
 
     // default tasks
@@ -141,7 +143,7 @@ async function runTask(ctx: ReleaseContext, task: ReleaseTask) {
       const taskName = task.slice(NpmScriptPrefix.length)
       const scriptTask = scripts[taskName]
       if (scriptTask) {
-        await ctx.run(`${detectNpmTool()} run ${scriptTask}`)
+        await ctx.runNpm(`run ${scriptTask}`)
         return
       }
     }
