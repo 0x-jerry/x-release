@@ -11,6 +11,7 @@ import { InternalReleaseTask, internalTasks, isInternalTask } from '../internalR
 import { run } from '../run'
 import { logger } from '../utils/dev'
 import { getConf } from '../modules/config'
+import { detectNpmTool } from '../utils/npmTool'
 
 const taskDescribe = `the tasks to run.
 
@@ -31,13 +32,13 @@ Combine tasks example: "x-release npm:test pkg.update.version git.commit git.tag
 
 This will run the below tasks:
 
-1. yarn run test
+1. npm run test
 2. update version in package.json
 3. git add .
 4. git commit -m "<commit msg>"
 5. git push && git push --tags
-6. yarn run build
-7. yarn publish --new-version <new-version>
+6. npm run build
+7. npm publish
 `
 
 export const install: CommandInstall = (cac) => {
@@ -140,7 +141,7 @@ async function runTask(ctx: ReleaseContext, task: ReleaseTask) {
       const taskName = task.slice(NpmScriptPrefix.length)
       const scriptTask = scripts[taskName]
       if (scriptTask) {
-        await ctx.run(`yarn run ${scriptTask}`)
+        await ctx.run(`${detectNpmTool()} run ${scriptTask}`)
         return
       }
     }
