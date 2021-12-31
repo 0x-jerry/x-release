@@ -143,7 +143,7 @@ async function runTask(ctx: ReleaseContext, task: ReleaseTask) {
       const taskName = task.slice(NpmScriptPrefix.length)
       const scriptTask = scripts[taskName]
       if (scriptTask) {
-        await ctx.runNpm(`run ${scriptTask}`)
+        await ctx.runNpm(`run ${taskName}`)
         return
       }
     }
