@@ -2,6 +2,7 @@ import { ReleaseTaskRunner } from './commands/_types'
 import fs from 'fs/promises'
 import path from 'path'
 import { readPackage } from './package'
+import { getConf } from './modules/config'
 
 export enum InternalReleaseTask {
   updatePkg = 'pkg.update.version',
@@ -25,12 +26,22 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
   async [InternalReleaseTask.commit](ctx) {
     await ctx.run('git add .')
 
-    const commitMsg = `chore: release v${ctx.nextVersion}`
+    const conf = await getConf()
 
-    await ctx.run(`git commit -m ${JSON.stringify(commitMsg)}`)
+    const commitTpl = conf.commit || 'chore: release v${version}'
+
+    const commit = renderString(commitTpl, { version: ctx.nextVersion })
+
+    await ctx.run(`git commit -m ${JSON.stringify(commit)}`)
   },
   async [InternalReleaseTask.tag](ctx) {
-    await ctx.run(`git tag v${ctx.nextVersion}`)
+    const conf = await getConf()
+
+    const tagTpl = conf.tag || 'v${version}'
+
+    const tag = renderString(tagTpl, { version: ctx.nextVersion })
+
+    await ctx.run(`git tag ${JSON.stringify(tag)}`)
   },
   async [InternalReleaseTask.push](ctx) {
     await ctx.run(`git push && git push --tags`)
@@ -44,4 +55,11 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
 
     await fs.writeFile(pkgFile, JSON.stringify(pkg, null, 2))
   },
+}
+
+function renderString(str: string, data: Record<string, string>) {
+  return str.replace(/\$\{[^}]+\}/, (item) => {
+    const key = item.slice(2, -1)
+    return data[key] || ''
+  })
 }
