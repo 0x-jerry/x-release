@@ -12,6 +12,14 @@ export async function getConf(reload = false) {
       {
         files: confFileName,
       },
+
+      {
+        files: 'package.json',
+        extensions: [],
+        rewrite(config: any) {
+          return config?.release
+        },
+      },
     ],
   })
 
