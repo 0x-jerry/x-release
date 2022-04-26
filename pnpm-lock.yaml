@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@0x-jerry/load-pkg': ^0.0.1
+  '@0x-jerry/load-pkg': ^0.1.2
   '@types/debug': ^4.1.7
   '@types/jest': ^27.0.3
   '@types/node': ^17.0.5
@@ -21,7 +21,7 @@ specifiers:
   vitest: ^0.10.0
 
 dependencies:
-  '@0x-jerry/load-pkg': 0.0.1
+  '@0x-jerry/load-pkg': 0.1.2
   cac: 6.7.12
   debug: 4.3.3
   esbuild: 0.14.9
@@ -44,8 +44,8 @@ devDependencies:
 
 packages:
 
-  /@0x-jerry/load-pkg/0.0.1:
-    resolution: {integrity: sha512-vV5wtNou9eTsaIUCfjvySWjTDgdIK16fp17gcxYLKTK5ynCg0aIfY3EkzEDDyh4voLH6uIzZ27xgjuMyfJ2XYg==}
+  /@0x-jerry/load-pkg/0.1.2:
+    resolution: {integrity: sha512-aV1qnSbezqlm1M4z+ZjL62p3u5q21986c445KDwJH1zgIErBlefXLf3Tv/Cao8DzA5o2P5iGFpeP2JNjhFRbNQ==}
     dev: false
 
   /@antfu/utils/0.3.0:

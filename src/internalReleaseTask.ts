@@ -1,7 +1,5 @@
 import { ReleaseTaskRunner } from './commands/_types'
 import fs from 'fs/promises'
-import path from 'path'
-import { readPackage } from './package'
 import { getConf } from './modules/config'
 import { renderString } from './utils/renderString'
 
@@ -29,7 +27,11 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
 
     const conf = await getConf()
 
-    const commitTpl = ctx.options.commit || conf.commit || 'chore: release v${version}'
+    const prefix = ctx.package.parent ? ctx.package.config.name + '@' : ''
+
+    const defaultCommitTpl = `chore: release ${prefix}v\${version}`
+
+    const commitTpl = ctx.options.commit || conf.commit || defaultCommitTpl
 
     const commit = renderString(commitTpl, { version: ctx.nextVersion })
 
@@ -38,7 +40,11 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
   async [InternalReleaseTask.tag](ctx) {
     const conf = await getConf()
 
-    const tagTpl = ctx.options.tag || conf.tag || 'v${version}'
+    const prefix = ctx.package.parent ? ctx.package.config.name + '@' : ''
+
+    const defaultTagTpl = `${prefix}v\${version}`
+
+    const tagTpl = ctx.options.tag || conf.tag || defaultTagTpl
 
     const tag = renderString(tagTpl, { version: ctx.nextVersion })
 
@@ -48,13 +54,12 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
     await ctx.run(`git push && git push --tags`)
   },
   async [InternalReleaseTask.updatePkg](ctx) {
-    const pkgPath = path.join(ctx.cwd, 'package.json')
+    // shallow clone
+    const pkg = {
+      ...ctx.package.config,
+      version: ctx.nextVersion,
+    }
 
-    const pkgTxt = await fs.readFile(pkgPath, { encoding: 'utf-8' })
-    const pkg = JSON.parse(pkgTxt)
-
-    pkg.version = ctx.nextVersion
-
-    await fs.writeFile(pkgPath, JSON.stringify(pkg, null, 2))
+    await fs.writeFile(ctx.package.path, JSON.stringify(pkg, null, 2))
   },
 }
