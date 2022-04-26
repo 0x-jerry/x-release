@@ -18,6 +18,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@0x-jerry/load-pkg": "^0.0.1",
     "cac": "^6.7.12",
     "debug": "^4.3.3",
     "esbuild": "^0.14.9",

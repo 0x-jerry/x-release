@@ -24,6 +24,10 @@ export interface ReleaseOption {
 }
 
 export interface ReleaseContext {
+  /**
+   * The directory contain a `package.json` file.
+   */
+  cwd: string
   package: Record<string, any>
   nextVersion: string
   run: (cmd: string) => void | Promise<void>

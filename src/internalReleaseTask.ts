@@ -48,12 +48,13 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
     await ctx.run(`git push && git push --tags`)
   },
   async [InternalReleaseTask.updatePkg](ctx) {
-    const pkg = await readPackage()
+    const pkgPath = path.join(ctx.cwd, 'package.json')
+
+    const pkgTxt = await fs.readFile(pkgPath, { encoding: 'utf-8' })
+    const pkg = JSON.parse(pkgTxt)
+
     pkg.version = ctx.nextVersion
 
-    const cwd = process.cwd()
-    const pkgFile = path.join(cwd, 'package.json')
-
-    await fs.writeFile(pkgFile, JSON.stringify(pkg, null, 2))
+    await fs.writeFile(pkgPath, JSON.stringify(pkg, null, 2))
   },
 }

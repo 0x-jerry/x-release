@@ -4,16 +4,16 @@ export type NpmTool = 'npm' | 'yarn' | 'pnpm'
 
 let cache: NpmTool | undefined
 
-export function detectNpmTool(cwd = process.cwd()) {
+export function detectNpmTool(dir: string) {
   if (cache) return cache
 
-  const isExist = (file: string) => fs.existsSync(path.resolve(cwd, file))
+  const isExist = (file: string) => fs.existsSync(path.resolve(dir, file))
 
   if (isExist('package-lock.json')) {
     cache = 'npm'
-  } else if (fs.existsSync('pnpm-lock.yaml')) {
+  } else if (isExist('pnpm-lock.yaml')) {
     cache = 'pnpm'
-  } else if (fs.existsSync('yarn.lock')) {
+  } else if (isExist('yarn.lock')) {
     cache = 'yarn'
   } else {
     cache = 'npm'
