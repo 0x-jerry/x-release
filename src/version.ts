@@ -6,10 +6,10 @@ export const releaseTypes: ReleaseType[] = [
   'patch',
   'minor',
   'major',
+  'prerelease',
   'prepatch',
   'preminor',
   'premajor',
-  'prerelease',
 ]
 
 /**
