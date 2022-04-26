@@ -1,4 +1,7 @@
 {
   "name": "@0x-jerry/pkg2",
-  "version": "1.0.1"
+  "version": "1.0.1",
+  "scripts": {
+    "release": "x-release"
+  }
 }
