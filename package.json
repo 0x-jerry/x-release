@@ -12,6 +12,11 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
+  "files": [
+    "src",
+    "cli.js",
+    "tsconfig.json"
+  ],
   "scripts": {
     "dev": "node dev.js",
     "release": "node cli.js",
