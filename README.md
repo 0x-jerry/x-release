@@ -2,6 +2,14 @@
 
 A tool that helps you to create a new release quickly.
 
+## Install
+
+```sh
+pnpm i @0x-jerry/x-release -D
+# or
+pnpm i @0x-jerry/x-release -g
+```
+
 ## Usage
 
 ```
@@ -65,7 +73,7 @@ import { defineConfig } from '@0x-jerry/x-release'
 export default defineConfig({
   sequence: [
     'npm:test', // execute npm run test
-    'pkg.update.version', // update version of package.json
+    'pkg.update.version', // update version property of package.json
     'git.commit', // execute git add . && git commit -m "${commit msg}"
     'git.tag', // execute git tag "v${new-version}"
     'git.push', // execute git push && git push --tags

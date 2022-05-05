@@ -6,10 +6,25 @@ import { getConf } from './modules/config'
 import { renderString } from './utils/renderString'
 
 export enum InternalReleaseTask {
+  /**
+   * Update version property of package.json.
+   */
   updatePkg = 'pkg.update.version',
+  /**
+   * Run `npm publish --tag ${new-version}`.
+   */
   publish = 'npm.publish',
+  /**
+   * Run `git add . && git commit -m ${commit-message}`
+   */
   commit = 'git.commit',
+  /**
+   * Run `git tag "v${new-version}"`
+   */
   tag = 'git.tag',
+  /**
+   * Run `git push && git push --tags`
+   */
   push = 'git.push',
 }
 
