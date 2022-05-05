@@ -7,12 +7,14 @@ import {
   ReleaseTask,
 } from './_types'
 import { releaseTypes, resolveVersion } from '../version'
-import { readPackage } from '../package'
 import { InternalReleaseTask, internalTasks, isInternalTask } from '../internalReleaseTask'
 import { run } from '../run'
 import { logger } from '../utils/dev'
 import { getConf } from '../modules/config'
 import { detectNpmTool } from '../utils/npmTool'
+import path from 'path'
+import pc from 'picocolors'
+import { loadPkg } from '@0x-jerry/load-pkg'
 
 const taskDescribe = `the tasks to run.
 
@@ -75,18 +77,27 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
   logger.log('releaseType: %s', releaseType)
 
   try {
-    const pkg = await readPackage()
+    const pkg = await loadPkg(process.cwd())
+    if (!pkg) {
+      console.log(pc.red(`Not found package.json file at: ${process.cwd()}`))
+      return
+    }
 
-    const nextVersion = await resolveVersion(pkg.version, releaseType, opt.newVersion)
+    const nextVersion = await resolveVersion(pkg.config.version, releaseType, opt.newVersion)
     logger.log('next version is: %s', nextVersion)
 
+    const pkgDir = path.parse(pkg.path).dir
+    // change `process.cwd()`
+    process.chdir(pkgDir)
+
     const ctx: ReleaseContext = {
+      cwd: pkgDir,
       package: pkg,
       options: opt,
       nextVersion,
       run,
       runNpm(cmd) {
-        const tool = opt.npm || detectNpmTool()
+        const tool = opt.npm || detectNpmTool(ctx.cwd)
         return run(`${tool} ${cmd}`)
       },
     }
@@ -125,7 +136,7 @@ async function runTasks(ctx: ReleaseContext, tasks: ReleaseTask[]) {
 }
 
 async function runTask(ctx: ReleaseContext, task: ReleaseTask) {
-  const scripts: Record<string, string> = ctx.package.scripts || {}
+  const scripts: Record<string, string> = ctx.package.config.scripts || {}
 
   if (typeof task === 'string') {
     if (isInternalTask(task)) {

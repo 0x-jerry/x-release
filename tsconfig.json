@@ -8,7 +8,8 @@
     "skipLibCheck": true,
     "lib": ["ESNext"],
     "resolveJsonModule": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": ["vitest/globals"]
   },
   "exclude": ["node_modules"]
 }

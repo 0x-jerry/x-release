@@ -1,3 +1,4 @@
+import { PackageFile } from '@0x-jerry/load-pkg'
 import { CAC } from 'cac'
 import { InternalReleaseTask } from '../internalReleaseTask'
 
@@ -24,7 +25,11 @@ export interface ReleaseOption {
 }
 
 export interface ReleaseContext {
-  package: Record<string, any>
+  /**
+   * The directory contain a `package.json` file.
+   */
+  cwd: string
+  package: PackageFile
   nextVersion: string
   run: (cmd: string) => void | Promise<void>
   options: ReleaseOption

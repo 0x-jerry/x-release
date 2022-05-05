@@ -1,0 +1,10 @@
+{
+  "name": "@0x-jerry/test",
+  "version": "1.0.0",
+  "scripts": {
+    "release": "x-release"
+  },
+  "devDependencies": {
+    "@0x-jerry/x-release": "workspace:^0.3.4-0"
+  }
+}
