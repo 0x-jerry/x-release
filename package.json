@@ -1,7 +1,7 @@
 {
   "name": "@0x-jerry/x-release",
   "description": "A convenient tool that helps you to create a new release.",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "main": "src/export.ts",
   "types": "src/export.ts",
   "license": "MIT",

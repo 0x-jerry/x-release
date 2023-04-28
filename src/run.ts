@@ -1,4 +1,4 @@
-import execa from 'execa'
+import { execa } from 'execa'
 import pc from 'picocolors'
 
 export async function run(cmd: string) {
