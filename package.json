@@ -19,8 +19,8 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "dev": "tsx dev.js",
-    "release": "tsx dev.js",
+    "dev": "tsx dev.ts",
+    "release": "tsx dev.ts",
     "build": "tsup src/main.ts --clean --format esm",
     "test": "vitest run"
   },

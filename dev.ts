@@ -1,7 +1,7 @@
-const pkg = require('./package.json')
-assert = require('assert')
+import { bin } from './package.json'
+import assert from 'assert'
 
-const name = Object.keys(pkg.bin || {})[0]
+const name = Object.keys(bin || {})[0]
 
 assert(name, 'Please fill bin property in package.json.')
 
@@ -14,4 +14,4 @@ if (name) {
 // set DEBUG env
 process.env.DEBUG = [...new Set([...env])].join(',')
 
-require('./src/main')
+import('./src/main')
