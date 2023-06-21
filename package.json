@@ -4,9 +4,10 @@
   "version": "0.3.7",
   "main": "src/export.ts",
   "types": "src/export.ts",
+  "type": "module",
   "license": "MIT",
   "bin": {
-    "x-release": "./cli.js"
+    "x-release": "dist/main.js"
   },
   "publishConfig": {
     "access": "public",
@@ -18,8 +19,8 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "dev": "node dev.js",
-    "release": "node cli.js",
+    "dev": "tsx dev.js",
+    "build": "tsup src/main.ts --clean --format esm",
     "test": "vitest run"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "@types/prompts": "^2.4.4",
     "@types/semver": "^7.3.13",
     "tsup": "^6.7.0",
+    "tsx": "^3.12.7",
     "typescript": "^5.0.4",
     "vitest": "^0.30.1"
   }

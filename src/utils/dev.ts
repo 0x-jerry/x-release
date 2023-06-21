@@ -1,4 +1,4 @@
-import { debug } from 'debug'
+import debug from 'debug'
 import { cliName } from './pkgConf'
 
 export function createLogger(ns?: string) {

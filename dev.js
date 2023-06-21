@@ -14,4 +14,4 @@ if (name) {
 // set DEBUG env
 process.env.DEBUG = [...new Set([...env])].join(',')
 
-require('./cli.js')
+require('./src/main')
