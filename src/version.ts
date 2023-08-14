@@ -18,11 +18,17 @@ export const releaseTypes: ReleaseType[] = [
  * @param opt
  * @param nextVersion
  */
-export async function resolveVersion(
-  currentVersion: string,
-  type?: string,
+export async function resolveVersion(opt: {
+  currentVersion: string
+  type?: string
   nextVersion?: string
-): Promise<string> {
+  /**
+   * @default 'beta'
+   */
+  semverIdentifier?: string
+}): Promise<string> {
+  const { currentVersion, type, nextVersion, semverIdentifier = 'beta' } = opt
+
   assert(semver.valid(currentVersion), 'Current version is not valid')
 
   const releaseType =
@@ -42,7 +48,7 @@ export async function resolveVersion(
   }
 
   const options: Choice[] = releaseTypes.map((type) => {
-    const nextVersion = semver.inc(currentVersion, type)!
+    const nextVersion = semver.inc(currentVersion, type, semverIdentifier)!
 
     return {
       title: nextVersion,

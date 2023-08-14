@@ -83,7 +83,12 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
       return
     }
 
-    const nextVersion = await resolveVersion(pkg.config.version, releaseType, opt.newVersion)
+    const nextVersion = await resolveVersion({
+      currentVersion: pkg.config.version,
+      type: releaseType,
+      nextVersion: opt.newVersion,
+    })
+
     logger.log('next version is: %s', nextVersion)
 
     const pkgDir = path.parse(pkg.path).dir
@@ -94,6 +99,7 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
       cwd: pkgDir,
       package: pkg,
       options: opt,
+      currentVersion: pkg.config.version,
       nextVersion,
       run,
       runNpm(cmd) {

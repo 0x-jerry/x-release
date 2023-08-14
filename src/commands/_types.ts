@@ -30,6 +30,7 @@ export interface ReleaseContext {
    */
   cwd: string
   package: PackageFile
+  currentVersion: string
   nextVersion: string
   run: (cmd: string) => void | Promise<void>
   options: ReleaseOption
