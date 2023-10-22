@@ -66,7 +66,8 @@ export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
     await ctx.run(`git tag ${JSON.stringify(tag)}`)
   },
   async [InternalReleaseTask.push](ctx) {
-    await ctx.run(`git push && git push --tags`)
+    await ctx.run(`git push`)
+    await ctx.run(`git push --tags`)
   },
   async [InternalReleaseTask.updatePkg](ctx) {
     // shallow clone

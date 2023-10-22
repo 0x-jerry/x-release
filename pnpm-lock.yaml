@@ -61,7 +61,7 @@ importers:
   example:
     devDependencies:
       '@0x-jerry/x-release':
-        specifier: workspace:^0.3.4-0
+        specifier: workspace:*
         version: link:..
 
 packages:

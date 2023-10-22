@@ -5,6 +5,6 @@
     "release": "x-release"
   },
   "devDependencies": {
-    "@0x-jerry/x-release": "workspace:^0.3.4-0"
+    "@0x-jerry/x-release": "workspace:*"
   }
 }
