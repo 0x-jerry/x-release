@@ -28,7 +28,7 @@
     "@0x-jerry/load-pkg": "^0.1.2",
     "cac": "^6.7.14",
     "debug": "^4.3.4",
-    "execa": "^7.1.1",
+    "execa": "^8.0.0",
     "picocolors": "^1.0.0",
     "prompts": "^2.4.2",
     "semver": "^7.5.2",
