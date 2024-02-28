@@ -35,13 +35,11 @@ Combine tasks example: "x-release npm:test pkg.update.version git.commit git.tag
 
 This will run the below tasks:
 
-1. npm run test
-2. update version in package.json
-3. git add .
-4. git commit -m "<commit msg>"
-5. git push && git push --tags
-6. npm run build
-7. npm publish
+1. update version in package.json
+2. git add .
+3. git commit -m "<commit msg>"
+4. git push && git push --tags
+5. npm publish
 `
 
 export const install: CommandInstall = (cac) => {
@@ -110,13 +108,10 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
 
     // default tasks
     const defaultTasks: ReleaseTask[] = [
-      'npm:test',
       InternalReleaseTask.updatePkg,
-      'npm:changelog',
       InternalReleaseTask.commit,
       InternalReleaseTask.tag,
       InternalReleaseTask.push,
-      'npm:build',
       InternalReleaseTask.publish,
     ]
 

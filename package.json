@@ -22,7 +22,8 @@
     "dev": "tsx dev.ts",
     "release": "tsx dev.ts",
     "build": "tsup src/main.ts --clean --format esm",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@0x-jerry/load-pkg": "^0.1.2",
