@@ -125,8 +125,8 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
 
     await runTasks(ctx, tasks)
   } catch (err) {
-    logger.error('%s', err)
-    return
+    console.error(err)
+    process.exit(1)
   }
 }
 
