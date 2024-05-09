@@ -14,54 +14,39 @@ pnpm i @0x-jerry/x-release -g
 
 ```
 Usage:
-  $ x-release [...tasks]
+  $ x-release [new-version]
 
 Commands:
-  [...tasks]  the tasks to run.
+  [new-version]  the tasks to run.
 
 Example:
 
-- "x-release npm:test": run scripts.test in package.json
-- "x-release run:echo 'hello'": run "echo 'hello'" in shell
-
-Internal tasks:
-
-- "x-release pkg.update.version": update version property in package.json
-- "x-release npm.publish": publish to npm
-- "x-release git.commit": create a commit
-- "x-release git.tag": create a new tag
-- "x-release git.push": push to remote
-
-Combine tasks example: "x-release npm:test pkg.update.version git.commit git.tag git.push npm:build npm.publish"
-
-This will run the below tasks:
-
-1. update version in package.json
-2. git add .
-3. git commit -m "<commit msg>"
-4. git push && git push --tags
-5. npm publish --new-version <new-version>
+- x-release --patch
+- x-release 0.0.1
+- x-release 0.1.1 --publish false
 
 
 For more info, run any command with the `--help` flag:
   $ x-release --help
 
 Options:
-  --new-version  specified the exact new version
-  --patch        auto-increment patch version number
-  --minor        auto-increment minor version number
-  --major        auto-increment major version number
-  --prepatch     auto-increment prepatch version number
-  --preminor     auto-increment preminor version number
-  --premajor     auto-increment premajor version number
-  --prerelease   auto-increment prerelease version number
-  -h, --help     Display this message
-  -v, --version  Display version number
+  --patch                auto-increment patch version number
+  --minor                auto-increment minor version number
+  --major                auto-increment major version number
+  --prepatch             auto-increment prepatch version number
+  --preminor             auto-increment preminor version number
+  --premajor             auto-increment premajor version number
+  --prerelease           auto-increment prerelease version number
+  --publish              run npm publish, default is true
+  --tag <tag-tpl>        new tag format, default is: "v${version}"
+  --commit <commit-tpl>  the commit message template, default is: "chore: release v${version}"
+  -h, --help             Display this message
+  -v, --version          Display version number
 ```
 
 ## Configuration
 
-Config file: `x.release.conf.ts`
+Config file: `release.conf.ts`
 
 Example config file:
 
@@ -69,15 +54,23 @@ Example config file:
 import { defineConfig } from '@0x-jerry/x-release'
 
 export default defineConfig({
-  sequence: [
-    'npm:test', // execute npm run test
-    'pkg.update.version', // update version property of package.json
-    'git.commit', // execute git add . && git commit -m "${commit msg}"
-    'git.tag', // execute git tag "v${new-version}"
-    'git.push', // execute git push && git push --tags
-    'npm:build', // execute npm run build
-    'npm.publish', // execute npm publish --tag ${new-version}
-    'run:echo "custom task"', // execute echo "custom task"
+  /**
+   * run npm publish, default true
+   */
+  publish: true,
+  /**
+   * tag template
+   */
+  tag: '${prefix}v${version}',
+  /**
+   * commit template
+   */
+  commit: 'chore: release ${prefix}v${version}',
+  /**
+   * run tasks after bump version
+   */
+  tasks: [
+    'npm test', // run npm test
     async (ctx) => {
       console.log('new version is:', ctx.nextVersion)
 
@@ -85,4 +78,21 @@ export default defineConfig({
     },
   ],
 })
+```
+
+Package.json `release`
+
+```json
+{
+  "release": {
+    "publish": true,
+    "tag": "${prefix}v${version}",
+    "commit": "chore: release ${prefix}v${version}",
+    "tasks": [
+      "npm run test",
+      "echo 'run custom script after bump version'",
+      "echo 'this should be the last script'"
+    ]
+  }
+}
 ```
