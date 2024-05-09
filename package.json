@@ -7,7 +7,7 @@
   "type": "module",
   "license": "MIT",
   "bin": {
-    "x-release": "dist/main.js"
+    "x-release": "dist/cli.js"
   },
   "publishConfig": {
     "access": "public",
@@ -21,7 +21,7 @@
   "scripts": {
     "dev": "tsx dev.ts",
     "release": "tsx src/cli.ts",
-    "build": "tsup src/main.ts --clean --format esm",
+    "build": "tsup src/cli.ts --clean --format esm",
     "test": "vitest run",
     "prepublishOnly": "npm run build"
   },
