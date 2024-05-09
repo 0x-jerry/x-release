@@ -1,5 +1,5 @@
-import prompts, { Choice } from 'prompts'
-import semver, { ReleaseType } from 'semver'
+import prompts, { type Choice } from 'prompts'
+import semver, { type ReleaseType } from 'semver'
 import assert from 'assert'
 
 export const releaseTypes: ReleaseType[] = [

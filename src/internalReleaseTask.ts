@@ -1,4 +1,4 @@
-import { ReleaseTaskRunner } from './commands/_types'
+import type { ReleaseTaskRunner } from './commands/_types'
 import fs from 'fs/promises'
 import { getConf } from './modules/config'
 import { renderString } from './utils/renderString'

@@ -1,4 +1,4 @@
-import { ReleaseTask } from './commands/_types'
+import type { ReleaseTask } from './commands/_types'
 
 export interface CliConfig {
   sequence: ReleaseTask[]

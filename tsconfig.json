@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "CommonJS",
+    "target": "ES2020",
+    "module": "ESNext",
     "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "moduleResolution": "Bundler",
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "lib": ["ESNext"],
     "resolveJsonModule": true,
     "outDir": "dist",
     "types": ["vitest/globals"]

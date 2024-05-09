@@ -1,6 +1,6 @@
 import { loadConfig } from 'unconfig'
 import { confFileName } from '../const'
-import { UserConfig } from '../types'
+import type { UserConfig } from '../types'
 
 let cache: UserConfig
 

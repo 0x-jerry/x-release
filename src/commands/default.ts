@@ -1,14 +1,14 @@
 import {
-  CommandInstall,
+  type CommandInstall,
   ExecScriptPrefix,
   NpmScriptPrefix,
-  ReleaseContext,
-  ReleaseOption,
-  ReleaseTask,
+  type ReleaseContext,
+  type ReleaseOption,
+  type ReleaseTask,
 } from './_types'
 import { releaseTypes, resolveVersion } from '../version'
 import { InternalReleaseTask, internalTasks, isInternalTask } from '../internalReleaseTask'
-import { run } from '../run'
+import { run } from '@0x-jerry/utils/node'
 import { logger } from '../utils/dev'
 import { getConf } from '../modules/config'
 import { detectNpmTool } from '../utils/npmTool'
@@ -99,10 +99,12 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
       options: opt,
       currentVersion: pkg.config.version,
       nextVersion,
-      run,
-      runNpm(cmd) {
+      run: async (cmd) => {
+        await run(cmd)
+      },
+      async runNpm(cmd) {
         const tool = opt.npm || detectNpmTool(ctx.cwd)
-        return run(`${tool} ${cmd}`)
+        await run(`${tool} ${cmd}`)
       },
     }
 

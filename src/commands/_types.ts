@@ -1,4 +1,4 @@
-import { PackageFile } from '@0x-jerry/load-pkg'
+import type { PackageFile } from '@0x-jerry/load-pkg'
 import { CAC } from 'cac'
 import { InternalReleaseTask } from '../internalReleaseTask'
 
