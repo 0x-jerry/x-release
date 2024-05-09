@@ -31,7 +31,7 @@ importers:
         version: 2.4.2
       semver:
         specifier: ^7.6.1
-        version: 7.6.1
+        version: 7.6.2
       unconfig:
         specifier: ^0.3.13
         version: 0.3.13
@@ -1657,8 +1657,8 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
-  /semver@7.6.1:
-    resolution: {integrity: sha512-f/vbBsu+fOiYt+lmwZV0rVwJScl46HppnOA1ZvIuBWKOTlllpyJ3bfVax76/OrhCH38dyxoDIA8K7uB963IYgA==}
+  /semver@7.6.2:
+    resolution: {integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==}
     engines: {node: '>=10'}
     hasBin: true
     dev: false
