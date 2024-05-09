@@ -8,6 +8,7 @@ import pc from 'picocolors'
 import { loadPkg } from '@0x-jerry/load-pkg'
 import type { CAC } from 'cac'
 import { defaultTasks, publishTask } from './internalReleaseTask'
+import type { ReleaseType } from 'semver'
 
 const taskDescribe = `the tasks to run.
 
@@ -55,10 +56,9 @@ async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
   logger.log('tasks: %o', newVersion)
   logger.log('opt: %o', opt)
 
-  const releaseType = Object.keys(opt).filter((key) =>
-    // @ts-expect-error
-    releaseTypes.includes(key)
-  )[0]
+  const releaseType = (Object.keys(opt) as ReleaseType[])
+    .filter((key) => releaseTypes.includes(key))
+    .at(0)
 
   logger.log('releaseType: %s', releaseType)
 

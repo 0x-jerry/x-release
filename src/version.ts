@@ -1,6 +1,8 @@
 import prompts, { type Choice } from 'prompts'
 import semver, { type ReleaseType } from 'semver'
 import assert from 'assert'
+import { run } from '@0x-jerry/utils/node'
+import { logger } from './utils/dev'
 
 export const releaseTypes: ReleaseType[] = [
   'patch',
@@ -20,7 +22,7 @@ export const releaseTypes: ReleaseType[] = [
  */
 export async function resolveVersion(opt: {
   currentVersion: string
-  type?: string
+  type?: ReleaseType
   nextVersion?: string
   /**
    * @default 'beta'
@@ -31,12 +33,8 @@ export async function resolveVersion(opt: {
 
   assert(semver.valid(currentVersion), 'Current version is not valid')
 
-  const releaseType =
-    // @ts-expect-error
-    releaseTypes.includes(type) ? (type as ReleaseType) : undefined
-
-  if (releaseType) {
-    return semver.inc(currentVersion, releaseType)!
+  if (type) {
+    return semver.inc(currentVersion, type)!
   }
 
   if (nextVersion) {
@@ -63,15 +61,58 @@ export async function resolveVersion(opt: {
     value: currentVersion,
   })
 
+  const recommendedNextVersionType = await detectNextVersionType()
+
+  const idx = recommendedNextVersionType ? releaseTypes.indexOf(recommendedNextVersionType) : 0
+
   const answer = await prompts({
     type: 'select',
     name: 'nextVersion',
     message: 'Pick a release version',
     choices: options,
-    initial: 1,
+    initial: idx + 1,
   })
+
+  // auto detect by git log
 
   assert(answer.nextVersion, 'Canceled!')
 
   return answer.nextVersion
+}
+
+async function detectNextVersionType(): Promise<semver.ReleaseType | false> {
+  try {
+    const tag = await run('git describe --tags --abbrev=0', undefined, {
+      collectOutput: true,
+      silent: true,
+    })
+
+    const logs = await run(`git --no-pager log ${tag.trim()}..HEAD --pretty=oneline`, undefined, {
+      collectOutput: true,
+      silent: true,
+    })
+
+    let type: ReleaseType = 'patch'
+
+    const lines = logs.split(/\n/g)
+
+    for (const log of lines) {
+      const segments = log.split(/\s+/g)
+      for (const seg of segments) {
+        if (seg.endsWith(':')) {
+          if (seg.includes('!')) {
+            type = 'major'
+            return type
+          } else if (seg.includes('feat')) {
+            type = 'minor'
+          }
+        }
+      }
+    }
+
+    return type
+  } catch (error) {
+    logger.error('detect next version failed, ignore:', error)
+    return false
+  }
 }
