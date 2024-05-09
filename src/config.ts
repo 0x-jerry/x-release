@@ -1,8 +1,9 @@
 import { loadConfig } from 'unconfig'
-import { confFileName } from '../const'
-import type { UserConfig } from '../types'
+import type { UserConfig } from './types'
 
 let cache: UserConfig
+
+const confFileName = 'release.conf'
 
 export async function getConf(reload = false) {
   if (cache && !reload) return cache

@@ -1,6 +1,6 @@
-import type { ReleaseTaskRunner } from './commands/_types'
+import type { TaskRunner } from './types'
 import fs from 'fs/promises'
-import { getConf } from './modules/config'
+import { getConf } from './config'
 import { renderString } from './utils/renderString'
 
 export enum InternalReleaseTask {
@@ -33,7 +33,7 @@ export function isInternalTask(task: string): task is InternalReleaseTask {
   return keys.includes(task)
 }
 
-export const internalTasks: Record<InternalReleaseTask, ReleaseTaskRunner> = {
+export const internalTasks: Record<InternalReleaseTask, TaskRunner> = {
   async [InternalReleaseTask.publish](ctx) {
     await ctx.runNpm('publish')
   },

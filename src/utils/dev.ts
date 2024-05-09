@@ -2,7 +2,7 @@ import debug from 'debug'
 import { cliName } from './pkgConf'
 
 export function createLogger(ns?: string) {
-  const name = cliName()
+  const name = cliName
 
   if (!ns) {
     return debug(name)

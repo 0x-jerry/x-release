@@ -1,7 +1,7 @@
 import { defineConfig, InternalReleaseTask } from '@0x-jerry/x-release'
 
 export default defineConfig({
-  sequence: [
+  tasks: [
     'npm:test',
     InternalReleaseTask.updatePkg,
     'npm:changelog',

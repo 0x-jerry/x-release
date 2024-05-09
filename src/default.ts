@@ -1,20 +1,13 @@
-import {
-  type CommandInstall,
-  ExecScriptPrefix,
-  NpmScriptPrefix,
-  type ReleaseContext,
-  type ReleaseOption,
-  type ReleaseTask,
-} from './_types'
-import { releaseTypes, resolveVersion } from '../version'
-import { InternalReleaseTask, internalTasks, isInternalTask } from '../internalReleaseTask'
+import { type ReleaseContext, type ReleaseCommandOption, type ReleaseTask } from './types'
+import { releaseTypes, resolveVersion } from './version'
+import { InternalReleaseTask } from './internalReleaseTask'
 import { run } from '@0x-jerry/utils/node'
-import { logger } from '../utils/dev'
-import { getConf } from '../modules/config'
-import { detectNpmTool } from '../utils/npmTool'
+import { logger } from './utils/dev'
+import { getConf } from './config'
 import path from 'path'
 import pc from 'picocolors'
 import { loadPkg } from '@0x-jerry/load-pkg'
+import type { CAC } from 'cac'
 
 const taskDescribe = `the tasks to run.
 
@@ -42,10 +35,10 @@ This will run the below tasks:
 5. npm publish
 `
 
-export const install: CommandInstall = (cac) => {
+export const install = (cac: CAC) => {
   // default command
   cac
-    .command('[...tasks]', taskDescribe)
+    .command('', taskDescribe)
     .option('--new-version', 'specified the exact new version')
     .option('--patch', 'auto-increment patch version number')
     .option('--minor', 'auto-increment minor version number')
@@ -54,16 +47,16 @@ export const install: CommandInstall = (cac) => {
     .option('--preminor', 'auto-increment preminor version number')
     .option('--premajor', 'auto-increment premajor version number')
     .option('--prerelease', 'auto-increment prerelease version number')
+    .option('--publish', 'run npm publish, default is true')
     .option('--tag <tag-tpl>', 'new tag format, default is: "v${version}"')
     .option(
       '--commit <commit-tpl>',
       'the commit message template, default is: "chore: release v${version}"'
     )
-    .option('--npm <npm-tool>', 'specified npm manager tool, default will check lockfile')
     .action(action)
 }
 
-async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
+async function action(cliTasks: string[] = [], opt: ReleaseCommandOption = {}) {
   logger.log('tasks: %o', cliTasks)
   logger.log('opt: %o', opt)
 
@@ -102,10 +95,6 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
       run: async (cmd) => {
         await run(cmd)
       },
-      async runNpm(cmd) {
-        const tool = opt.npm || detectNpmTool(ctx.cwd)
-        await run(`${tool} ${cmd}`)
-      },
     }
 
     // default tasks
@@ -119,8 +108,8 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
 
     const conf = await getConf()
 
-    const tasks: ReleaseTask[] = conf.sequence?.length
-      ? conf.sequence
+    const tasks: ReleaseTask[] = conf.tasks?.length
+      ? conf.tasks
       : cliTasks.length
       ? (cliTasks as ReleaseTask[])
       : defaultTasks
@@ -134,37 +123,10 @@ async function action(cliTasks: string[] = [], opt: ReleaseOption = {}) {
 
 async function runTasks(ctx: ReleaseContext, tasks: ReleaseTask[]) {
   for (const task of tasks) {
-    await runTask(ctx, task)
-  }
-}
-
-async function runTask(ctx: ReleaseContext, task: ReleaseTask) {
-  const scripts: Record<string, string> = ctx.package.config.scripts || {}
-
-  if (typeof task === 'string') {
-    if (isInternalTask(task)) {
-      await internalTasks[task](ctx)
-      return
+    if (typeof task === 'string') {
+      await ctx.run(task)
+    } else {
+      await task(ctx)
     }
-
-    // check run:xxxx, shell task
-    if (task.startsWith(ExecScriptPrefix)) {
-      await ctx.run(task.slice(ExecScriptPrefix.length).trim())
-      return
-    }
-
-    // check npm:xxx, npm task
-    if (task.startsWith(NpmScriptPrefix)) {
-      const taskName = task.slice(NpmScriptPrefix.length)
-      const scriptTask = scripts[taskName]
-      if (scriptTask) {
-        await ctx.runNpm(`run ${taskName}`)
-        return
-      }
-    }
-
-    logger.warn(`Can't found task %s`, task)
-  } else {
-    await task(ctx)
   }
 }
