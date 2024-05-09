@@ -7,8 +7,7 @@ export interface ReleaseConfig {
   publish: boolean
 
   /**
-   * tasks to run,
-   *
+   * run custom tasks after bump version
    */
   tasks: ReleaseTask[]
 

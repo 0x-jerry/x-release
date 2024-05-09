@@ -2,10 +2,19 @@ import type { ReleaseTask } from './types'
 import fs from 'fs/promises'
 import { renderString } from './utils/renderString'
 
+export const publishTask: ReleaseTask = {
+  name: 'npm publish',
+  async task(ctx) {
+    await ctx.run('npm publish')
+  },
+}
+
 export const defaultTasks: ReleaseTask[] = [
   {
-    name: 'update version',
+    name: 'update package version',
     async task(ctx) {
+      if (ctx.currentVersion === ctx.nextVersion) return
+
       // shallow clone
       const pkg = {
         ...ctx.package.config,
@@ -18,6 +27,8 @@ export const defaultTasks: ReleaseTask[] = [
   {
     name: 'git commit',
     async task(ctx) {
+      if (ctx.currentVersion === ctx.nextVersion) return
+
       await ctx.run('git add .')
 
       const prefix = ctx.package.parent ? ctx.package.config.name + '@' : ''
@@ -30,6 +41,8 @@ export const defaultTasks: ReleaseTask[] = [
   {
     name: 'git tag',
     async task(ctx) {
+      if (ctx.currentVersion === ctx.nextVersion) return
+
       const prefix = ctx.package.parent ? ctx.package.config.name + '@' : ''
 
       const tag = renderString(ctx.conf.tag, { version: ctx.nextVersion, prefix })
@@ -42,16 +55,6 @@ export const defaultTasks: ReleaseTask[] = [
     async task(ctx) {
       await ctx.run(`git push`)
       await ctx.run(`git push --tags`)
-    },
-  },
-  {
-    name: 'npm publish',
-    async task(ctx) {
-      if (!ctx.conf.publish) {
-        return
-      }
-
-      await ctx.run('npm publish')
     },
   },
 ]

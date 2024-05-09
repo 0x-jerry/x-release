@@ -7,7 +7,7 @@ import path from 'path'
 import pc from 'picocolors'
 import { loadPkg } from '@0x-jerry/load-pkg'
 import type { CAC } from 'cac'
-import { defaultTasks } from './internalReleaseTask'
+import { defaultTasks, publishTask } from './internalReleaseTask'
 
 const taskDescribe = `the tasks to run.
 
@@ -94,7 +94,11 @@ async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
       },
     }
 
-    const tasks: ReleaseTask[] = [...defaultTasks, ...config.tasks]
+    const tasks: ReleaseTask[] = [
+      ...defaultTasks,
+      ...(config.publish ? [publishTask] : []),
+      ...config.tasks,
+    ]
 
     await runTasks(ctx, tasks)
   } catch (err) {
