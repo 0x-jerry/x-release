@@ -19,7 +19,7 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "dev": "tsx src/cli.ts",
+    "dev": "tsx dev.ts",
     "release": "tsx src/cli.ts",
     "build": "tsup src/main.ts --clean --format esm",
     "test": "vitest run",

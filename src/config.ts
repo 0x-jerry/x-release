@@ -1,5 +1,6 @@
 import { loadConfig } from 'unconfig'
 import type { ReleaseConfig, UserConfig } from './types'
+import { logger } from './utils/dev'
 
 const confFileName = 'release.conf'
 
@@ -31,11 +32,20 @@ export async function getConf() {
 }
 
 export async function resolveConfig(opt: UserConfig) {
-  const config: ReleaseConfig = Object.assign(defaultConfig, await getConf(), {
-    publish: opt.publish,
-    commit: opt.commit,
-    tag: opt.tag,
-  })
+  const definedProps = (obj: UserConfig) =>
+    Object.fromEntries(Object.entries(obj).filter(([k, v]) => v !== undefined))
+
+  const config: ReleaseConfig = Object.assign(
+    defaultConfig,
+    definedProps(await getConf()),
+    definedProps({
+      publish: opt.publish,
+      commit: opt.commit,
+      tag: opt.tag,
+    })
+  )
+
+  logger.log('resolve config:', config)
 
   return config
 }
