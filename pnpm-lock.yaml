@@ -22,7 +22,7 @@ importers:
         version: 4.3.4
       execa:
         specifier: ^9.0.0
-        version: 9.0.0
+        version: 9.0.1
       picocolors:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1097,8 +1097,8 @@ packages:
       strip-final-newline: 3.0.0
     dev: true
 
-  /execa@9.0.0:
-    resolution: {integrity: sha512-YqlYPdTp6UMdt0WEM8QKeBR8ORtgxWP7ZB5NB9AMlfGWg32Fg48j6uZdKfhG2o6cNJBIRPF0Ok93R0vY37oBWQ==}
+  /execa@9.0.1:
+    resolution: {integrity: sha512-U5ck8xJmf3sVebV1v+Hh436VWHVHUfzkdbKJynd3kCP9sQRDxCY5x2Tml5lGB7XM6lpj6ATfgWWqynDt2MBLJg==}
     engines: {node: '>=18'}
     dependencies:
       '@sindresorhus/merge-streams': 4.0.0
