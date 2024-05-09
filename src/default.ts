@@ -14,8 +14,8 @@ const taskDescribe = `the tasks to run.
 Example:
 
 - x-release --patch
-- x-release v0.0.1
-- x-release v0.0.1 --publish false
+- x-release 0.0.1
+- x-release 0.1.1 --publish false
 `
 
 interface ReleaseCommandOption {
