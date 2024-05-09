@@ -1,13 +1,16 @@
 import { loadConfig } from 'unconfig'
-import type { UserConfig } from './types'
-
-let cache: UserConfig
+import type { ReleaseConfig, UserConfig } from './types'
 
 const confFileName = 'release.conf'
 
-export async function getConf(reload = false) {
-  if (cache && !reload) return cache
+const defaultConfig: ReleaseConfig = {
+  publish: true,
+  tasks: [],
+  commit: 'chore: release ${prefix}v${version}',
+  tag: '${prefix}v${version}',
+}
 
+export async function getConf() {
   const res = await loadConfig<UserConfig>({
     sources: [
       {
@@ -24,7 +27,15 @@ export async function getConf(reload = false) {
     ],
   })
 
-  cache = res.config || {}
+  return res.config || {}
+}
 
-  return cache
+export async function resolveConfig(opt: UserConfig) {
+  const config: ReleaseConfig = Object.assign(defaultConfig, await getConf(), {
+    publish: opt.publish,
+    commit: opt.commit,
+    tag: opt.tag,
+  })
+
+  return config
 }

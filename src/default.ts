@@ -1,45 +1,40 @@
-import { type ReleaseContext, type ReleaseCommandOption, type ReleaseTask } from './types'
+import { type ReleaseConfig, type ReleaseContext, type ReleaseTask } from './types'
 import { releaseTypes, resolveVersion } from './version'
-import { InternalReleaseTask } from './internalReleaseTask'
 import { run } from '@0x-jerry/utils/node'
 import { logger } from './utils/dev'
-import { getConf } from './config'
+import { resolveConfig } from './config'
 import path from 'path'
 import pc from 'picocolors'
 import { loadPkg } from '@0x-jerry/load-pkg'
 import type { CAC } from 'cac'
+import { defaultTasks } from './internalReleaseTask'
 
 const taskDescribe = `the tasks to run.
 
 Example:
 
-- "x-release npm:test": run scripts.test in package.json
-- "x-release run:echo 'hello'": run "echo 'hello'" in shell
-
-Internal tasks:
-
-- "x-release pkg.update.version": update version property in package.json
-- "x-release npm.publish": publish to npm
-- "x-release git.commit": create a commit
-- "x-release git.tag": create a new tag
-- "x-release git.push": push to remote
-
-Combine tasks example: "x-release npm:test pkg.update.version git.commit git.tag git.push npm:build npm.publish"
-
-This will run the below tasks:
-
-1. update version in package.json
-2. git add .
-3. git commit -m "<commit msg>"
-4. git push && git push --tags
-5. npm publish
+- x-release --patch
+- x-release v0.0.1
+- x-release v0.0.1 --publish false
 `
+
+interface ReleaseCommandOption {
+  major?: boolean
+  minor?: boolean
+  premajor?: boolean
+  preminor?: boolean
+  prerelase?: boolean
+  prerelease?: boolean
+
+  publish?: boolean
+  tag?: string
+  commit?: string
+}
 
 export const install = (cac: CAC) => {
   // default command
   cac
-    .command('', taskDescribe)
-    .option('--new-version', 'specified the exact new version')
+    .command('[new-version]', taskDescribe)
     .option('--patch', 'auto-increment patch version number')
     .option('--minor', 'auto-increment minor version number')
     .option('--major', 'auto-increment major version number')
@@ -56,8 +51,8 @@ export const install = (cac: CAC) => {
     .action(action)
 }
 
-async function action(cliTasks: string[] = [], opt: ReleaseCommandOption = {}) {
-  logger.log('tasks: %o', cliTasks)
+async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
+  logger.log('tasks: %o', newVersion)
   logger.log('opt: %o', opt)
 
   const releaseType = Object.keys(opt).filter((key) =>
@@ -77,42 +72,29 @@ async function action(cliTasks: string[] = [], opt: ReleaseCommandOption = {}) {
     const nextVersion = await resolveVersion({
       currentVersion: pkg.config.version,
       type: releaseType,
-      nextVersion: opt.newVersion,
+      nextVersion: newVersion,
     })
 
     logger.log('next version is: %s', nextVersion)
 
-    const pkgDir = path.parse(pkg.path).dir
+    const pkgDir = path.dirname(pkg.path)
     // change `process.cwd()`
     process.chdir(pkgDir)
+
+    const config: ReleaseConfig = await resolveConfig(opt)
 
     const ctx: ReleaseContext = {
       cwd: pkgDir,
       package: pkg,
-      options: opt,
       currentVersion: pkg.config.version,
       nextVersion,
+      conf: config,
       run: async (cmd) => {
         await run(cmd)
       },
     }
 
-    // default tasks
-    const defaultTasks: ReleaseTask[] = [
-      InternalReleaseTask.updatePkg,
-      InternalReleaseTask.commit,
-      InternalReleaseTask.tag,
-      InternalReleaseTask.push,
-      InternalReleaseTask.publish,
-    ]
-
-    const conf = await getConf()
-
-    const tasks: ReleaseTask[] = conf.tasks?.length
-      ? conf.tasks
-      : cliTasks.length
-      ? (cliTasks as ReleaseTask[])
-      : defaultTasks
+    const tasks: ReleaseTask[] = [...defaultTasks, ...config.tasks]
 
     await runTasks(ctx, tasks)
   } catch (err) {
@@ -123,10 +105,16 @@ async function action(cliTasks: string[] = [], opt: ReleaseCommandOption = {}) {
 
 async function runTasks(ctx: ReleaseContext, tasks: ReleaseTask[]) {
   for (const task of tasks) {
-    if (typeof task === 'string') {
-      await ctx.run(task)
-    } else {
-      await task(ctx)
-    }
+    await runTask(ctx, task)
+  }
+}
+
+async function runTask(ctx: ReleaseContext, task: ReleaseTask) {
+  if (typeof task === 'string') {
+    await ctx.run(task)
+  } else if (typeof task === 'function') {
+    await task(ctx)
+  } else {
+    await task.task(ctx)
   }
 }
