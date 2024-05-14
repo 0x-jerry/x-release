@@ -1,6 +1,7 @@
 import type { ReleaseTask } from './types'
 import fs from 'fs/promises'
 import { renderString } from './utils/renderString'
+import { runTask } from './helper'
 
 export const publishTask: ReleaseTask = {
   name: 'npm publish',
@@ -22,6 +23,14 @@ export const defaultTasks: ReleaseTask[] = [
       }
 
       await fs.writeFile(ctx.package.path, JSON.stringify(pkg, null, 2))
+    },
+  },
+  {
+    name: 'before commit',
+    async task(ctx) {
+      if (ctx.conf.beforeCommit) {
+        runTask(ctx, ctx.conf.beforeCommit)
+      }
     },
   },
   {

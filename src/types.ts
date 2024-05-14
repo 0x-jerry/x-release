@@ -28,6 +28,8 @@ export interface ReleaseConfig {
    * @default "v${version}"
    */
   tag: string
+
+  beforeCommit?: ReleaseTask
 }
 
 export type UserConfig = Partial<ReleaseConfig>

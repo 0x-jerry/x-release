@@ -9,6 +9,7 @@ import { loadPkg } from '@0x-jerry/load-pkg'
 import type { CAC } from 'cac'
 import { defaultTasks, publishTask } from './internalReleaseTask'
 import type { ReleaseType } from 'semver'
+import { runTasks } from './helper'
 
 const taskDescribe = `the tasks to run.
 
@@ -104,21 +105,5 @@ async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
   } catch (err) {
     console.error(err)
     process.exit(1)
-  }
-}
-
-async function runTasks(ctx: ReleaseContext, tasks: ReleaseTask[]) {
-  for (const task of tasks) {
-    await runTask(ctx, task)
-  }
-}
-
-async function runTask(ctx: ReleaseContext, task: ReleaseTask) {
-  if (typeof task === 'string') {
-    await ctx.run(task)
-  } else if (typeof task === 'function') {
-    await task(ctx)
-  } else {
-    await task.task(ctx)
   }
 }
