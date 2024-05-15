@@ -29,6 +29,12 @@ export interface ReleaseConfig {
    */
   tag: string
 
+  /**
+   * clear those folder before run npm publish,
+   * only available when `publish` is true
+   */
+  clean?: string[]
+
   beforeCommit?: ReleaseTask
 }
 

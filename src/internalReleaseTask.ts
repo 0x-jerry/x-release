@@ -2,10 +2,14 @@ import type { ReleaseTask } from './types'
 import fs from 'fs/promises'
 import { renderString } from './utils/renderString'
 import { runTask } from './helper'
+import { clean } from './utils/clean'
 
 export const publishTask: ReleaseTask = {
   name: 'npm publish',
   async task(ctx) {
+    if (ctx.conf.clean) {
+      await clean(ctx.conf.clean, ctx.cwd)
+    }
     await ctx.run('npm publish')
   },
 }
