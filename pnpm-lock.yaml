@@ -4,65 +4,57 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
+dependencies:
+  '@0x-jerry/load-pkg':
+    specifier: ^0.1.5
+    version: 0.1.5
+  '@0x-jerry/utils':
+    specifier: ^2.2.7
+    version: 2.2.7
+  cac:
+    specifier: ^6.7.14
+    version: 6.7.14
+  debug:
+    specifier: ^4.3.4
+    version: 4.3.4
+  picocolors:
+    specifier: ^1.0.1
+    version: 1.0.1
+  prompts:
+    specifier: ^2.4.2
+    version: 2.4.2
+  semver:
+    specifier: ^7.6.2
+    version: 7.6.2
+  unconfig:
+    specifier: ^0.4.1
+    version: 0.4.1
 
-  .:
-    dependencies:
-      '@0x-jerry/load-pkg':
-        specifier: ^0.1.5
-        version: 0.1.5
-      '@0x-jerry/utils':
-        specifier: ^2.2.7
-        version: 2.2.7
-      cac:
-        specifier: ^6.7.14
-        version: 6.7.14
-      debug:
-        specifier: ^4.3.4
-        version: 4.3.4
-      picocolors:
-        specifier: ^1.0.1
-        version: 1.0.1
-      prompts:
-        specifier: ^2.4.2
-        version: 2.4.2
-      semver:
-        specifier: ^7.6.2
-        version: 7.6.2
-      unconfig:
-        specifier: ^0.4.1
-        version: 0.4.1
-    devDependencies:
-      '@types/debug':
-        specifier: ^4.1.12
-        version: 4.1.12
-      '@types/node':
-        specifier: ^20.12.12
-        version: 20.12.12
-      '@types/prompts':
-        specifier: ^2.4.9
-        version: 2.4.9
-      '@types/semver':
-        specifier: ^7.5.8
-        version: 7.5.8
-      tsup:
-        specifier: ^8.0.2
-        version: 8.0.2(typescript@5.4.5)
-      tsx:
-        specifier: ^4.10.4
-        version: 4.10.4
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
-      vitest:
-        specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.12.12)
-
-  example:
-    devDependencies:
-      '@0x-jerry/x-release':
-        specifier: workspace:*
-        version: link:..
+devDependencies:
+  '@types/debug':
+    specifier: ^4.1.12
+    version: 4.1.12
+  '@types/node':
+    specifier: ^20.12.12
+    version: 20.12.12
+  '@types/prompts':
+    specifier: ^2.4.9
+    version: 2.4.9
+  '@types/semver':
+    specifier: ^7.5.8
+    version: 7.5.8
+  tsup:
+    specifier: ^8.0.2
+    version: 8.0.2(typescript@5.4.5)
+  tsx:
+    specifier: ^4.10.4
+    version: 4.10.5
+  typescript:
+    specifier: ^5.4.5
+    version: 5.4.5
+  vitest:
+    specifier: ^1.6.0
+    version: 1.6.0(@types/node@20.12.12)
 
 packages:
 
@@ -1178,7 +1170,7 @@ packages:
       debug: 4.3.4
       esbuild: 0.20.2
       jiti: 1.21.0
-      tsx: 4.10.4
+      tsx: 4.10.5
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1780,8 +1772,8 @@ packages:
       - ts-node
     dev: true
 
-  /tsx@4.10.4:
-    resolution: {integrity: sha512-Gtg9qnZWNqC/OtcgiXfoAUdAKx3/cgKOYvEocAsv+m21MV/eKpV/WUjRXe6/sDCaGBl2/v8S6v29BpUnGMCX5A==}
+  /tsx@4.10.5:
+    resolution: {integrity: sha512-twDSbf7Gtea4I2copqovUiNTEDrT8XNFXsuHpfGbdpW/z9ZW4fTghzzhAG0WfrCuJmJiOEY1nLIjq4u3oujRWQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
