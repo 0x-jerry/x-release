@@ -12,8 +12,8 @@ importers:
         specifier: ^0.1.5
         version: 0.1.5
       '@0x-jerry/utils':
-        specifier: ^2.2.6
-        version: 2.2.6
+        specifier: ^2.2.7
+        version: 2.2.7
       cac:
         specifier: ^6.7.14
         version: 6.7.14
@@ -70,8 +70,8 @@ packages:
     resolution: {integrity: sha512-OsG9WZfCDzLaIC5t7HNHAYdpvZEf5efs/+fLEXsbOQr3IdZyMuWA27utAOsrNwTfl1BCgr6+r048ZyMd9YE72Q==}
     dev: false
 
-  /@0x-jerry/utils@2.2.6:
-    resolution: {integrity: sha512-Gbv/6oKkyuUNKD2f41ahWfMzi1hZmcqOJauQDSzxsNyBv1O4SOfOzYgS+9w8o9JfhzcHiDvLC+IPaHUddil1ow==}
+  /@0x-jerry/utils@2.2.7:
+    resolution: {integrity: sha512-+qb/blJNlEdB1ce/0AJyG+YvZUyjScDnkQVIAJykXzVWrWxB4mdFFz2nA6OHqPySquUgrbtRc/DwAzAGw1Ii/Q==}
     dependencies:
       fflate: 0.8.2
       nanoid: 5.0.7
