@@ -26,22 +26,22 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@0x-jerry/load-pkg": "^0.1.2",
-    "@0x-jerry/utils": "^2.2.5",
+    "@0x-jerry/load-pkg": "^0.1.5",
+    "@0x-jerry/utils": "^2.2.6",
     "cac": "^6.7.14",
     "debug": "^4.3.4",
-    "picocolors": "^1.0.0",
+    "picocolors": "^1.0.1",
     "prompts": "^2.4.2",
-    "semver": "^7.6.1",
-    "unconfig": "^0.3.13"
+    "semver": "^7.6.2",
+    "unconfig": "^0.4.1"
   },
   "devDependencies": {
     "@types/debug": "^4.1.12",
-    "@types/node": "^20.12.11",
+    "@types/node": "^20.12.12",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.5.8",
     "tsup": "^8.0.2",
-    "tsx": "^4.9.3",
+    "tsx": "^4.10.4",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   }
