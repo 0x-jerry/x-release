@@ -1,7 +1,7 @@
 {
   "name": "@0x-jerry/x-release",
   "description": "A convenient tool that helps you to create a new release.",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "main": "dist/export.js",
   "types": "dist/export.d.ts",
   "type": "module",
