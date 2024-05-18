@@ -2,8 +2,8 @@
   "name": "@0x-jerry/x-release",
   "description": "A convenient tool that helps you to create a new release.",
   "version": "2.2.0",
-  "main": "src/export.ts",
-  "types": "src/export.ts",
+  "main": "dist/export.js",
+  "types": "dist/export.d.ts",
   "type": "module",
   "license": "MIT",
   "bin": {
@@ -15,15 +15,25 @@
   },
   "files": [
     "src",
-    "cli.js",
-    "tsconfig.json"
+    "dist"
   ],
   "scripts": {
     "dev": "tsx dev.ts",
     "release": "tsx src/cli.ts",
-    "build": "tsup src/cli.ts --clean --format esm",
+    "build": "tsup",
     "test": "vitest run",
     "prepublishOnly": "npm run build"
+  },
+  "tsup": {
+    "entry": [
+      "src/cli.ts",
+      "src/export.ts"
+    ],
+    "dts": true,
+    "clean": true,
+    "format": [
+      "esm"
+    ]
   },
   "dependencies": {
     "@0x-jerry/load-pkg": "^0.1.5",
