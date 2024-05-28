@@ -4,65 +4,57 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
+dependencies:
+  '@0x-jerry/load-pkg':
+    specifier: ^0.1.5
+    version: 0.1.5
+  '@0x-jerry/utils':
+    specifier: ^2.2.7
+    version: 2.3.0
+  cac:
+    specifier: ^6.7.14
+    version: 6.7.14
+  debug:
+    specifier: ^4.3.4
+    version: 4.3.4
+  picocolors:
+    specifier: ^1.0.1
+    version: 1.0.1
+  prompts:
+    specifier: ^2.4.2
+    version: 2.4.2
+  semver:
+    specifier: ^7.6.2
+    version: 7.6.2
+  unconfig:
+    specifier: ^0.4.1
+    version: 0.4.1
 
-  .:
-    dependencies:
-      '@0x-jerry/load-pkg':
-        specifier: ^0.1.5
-        version: 0.1.5
-      '@0x-jerry/utils':
-        specifier: ^2.2.7
-        version: 2.2.7
-      cac:
-        specifier: ^6.7.14
-        version: 6.7.14
-      debug:
-        specifier: ^4.3.4
-        version: 4.3.4
-      picocolors:
-        specifier: ^1.0.1
-        version: 1.0.1
-      prompts:
-        specifier: ^2.4.2
-        version: 2.4.2
-      semver:
-        specifier: ^7.6.2
-        version: 7.6.2
-      unconfig:
-        specifier: ^0.4.1
-        version: 0.4.1
-    devDependencies:
-      '@types/debug':
-        specifier: ^4.1.12
-        version: 4.1.12
-      '@types/node':
-        specifier: ^20.12.12
-        version: 20.12.12
-      '@types/prompts':
-        specifier: ^2.4.9
-        version: 2.4.9
-      '@types/semver':
-        specifier: ^7.5.8
-        version: 7.5.8
-      tsup:
-        specifier: ^8.0.2
-        version: 8.0.2(typescript@5.4.5)
-      tsx:
-        specifier: ^4.10.4
-        version: 4.10.4
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
-      vitest:
-        specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.12.12)
-
-  example:
-    devDependencies:
-      '@0x-jerry/x-release':
-        specifier: workspace:*
-        version: link:..
+devDependencies:
+  '@types/debug':
+    specifier: ^4.1.12
+    version: 4.1.12
+  '@types/node':
+    specifier: ^20.12.12
+    version: 20.12.12
+  '@types/prompts':
+    specifier: ^2.4.9
+    version: 2.4.9
+  '@types/semver':
+    specifier: ^7.5.8
+    version: 7.5.8
+  tsup:
+    specifier: ^8.0.2
+    version: 8.0.2(typescript@5.4.5)
+  tsx:
+    specifier: ^4.10.4
+    version: 4.10.4
+  typescript:
+    specifier: ^5.4.5
+    version: 5.4.5
+  vitest:
+    specifier: ^1.6.0
+    version: 1.6.0(@types/node@20.12.12)
 
 packages:
 
@@ -70,8 +62,8 @@ packages:
     resolution: {integrity: sha512-OsG9WZfCDzLaIC5t7HNHAYdpvZEf5efs/+fLEXsbOQr3IdZyMuWA27utAOsrNwTfl1BCgr6+r048ZyMd9YE72Q==}
     dev: false
 
-  /@0x-jerry/utils@2.2.7:
-    resolution: {integrity: sha512-+qb/blJNlEdB1ce/0AJyG+YvZUyjScDnkQVIAJykXzVWrWxB4mdFFz2nA6OHqPySquUgrbtRc/DwAzAGw1Ii/Q==}
+  /@0x-jerry/utils@2.3.0:
+    resolution: {integrity: sha512-rHxU8lWGSpUS8n1uvqBeoiIPdMr7vMLPnFHGwl43ko+q1cUFkWBocuGJeLhAVCuA+t7e3ZaW1OVXN4T6dwAeRw==}
     dependencies:
       fflate: 0.8.2
       nanoid: 5.0.7
