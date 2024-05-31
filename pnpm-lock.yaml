@@ -4,65 +4,57 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
+dependencies:
+  '@0x-jerry/load-pkg':
+    specifier: ^0.1.5
+    version: 0.1.5
+  '@0x-jerry/utils':
+    specifier: ^2.2.7
+    version: 2.2.7
+  cac:
+    specifier: ^6.7.14
+    version: 6.7.14
+  debug:
+    specifier: ^4.3.4
+    version: 4.3.5
+  picocolors:
+    specifier: ^1.0.1
+    version: 1.0.1
+  prompts:
+    specifier: ^2.4.2
+    version: 2.4.2
+  semver:
+    specifier: ^7.6.2
+    version: 7.6.2
+  unconfig:
+    specifier: ^0.4.1
+    version: 0.4.1
 
-  .:
-    dependencies:
-      '@0x-jerry/load-pkg':
-        specifier: ^0.1.5
-        version: 0.1.5
-      '@0x-jerry/utils':
-        specifier: ^2.2.7
-        version: 2.2.7
-      cac:
-        specifier: ^6.7.14
-        version: 6.7.14
-      debug:
-        specifier: ^4.3.4
-        version: 4.3.4
-      picocolors:
-        specifier: ^1.0.1
-        version: 1.0.1
-      prompts:
-        specifier: ^2.4.2
-        version: 2.4.2
-      semver:
-        specifier: ^7.6.2
-        version: 7.6.2
-      unconfig:
-        specifier: ^0.4.1
-        version: 0.4.1
-    devDependencies:
-      '@types/debug':
-        specifier: ^4.1.12
-        version: 4.1.12
-      '@types/node':
-        specifier: ^20.12.12
-        version: 20.12.12
-      '@types/prompts':
-        specifier: ^2.4.9
-        version: 2.4.9
-      '@types/semver':
-        specifier: ^7.5.8
-        version: 7.5.8
-      tsup:
-        specifier: ^8.0.2
-        version: 8.0.2(typescript@5.4.5)
-      tsx:
-        specifier: ^4.10.4
-        version: 4.10.4
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
-      vitest:
-        specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.12.12)
-
-  example:
-    devDependencies:
-      '@0x-jerry/x-release':
-        specifier: workspace:*
-        version: link:..
+devDependencies:
+  '@types/debug':
+    specifier: ^4.1.12
+    version: 4.1.12
+  '@types/node':
+    specifier: ^20.12.12
+    version: 20.12.12
+  '@types/prompts':
+    specifier: ^2.4.9
+    version: 2.4.9
+  '@types/semver':
+    specifier: ^7.5.8
+    version: 7.5.8
+  tsup:
+    specifier: ^8.0.2
+    version: 8.0.2(typescript@5.4.5)
+  tsx:
+    specifier: ^4.10.4
+    version: 4.10.4
+  typescript:
+    specifier: ^5.4.5
+    version: 5.4.5
+  vitest:
+    specifier: ^1.6.0
+    version: 1.6.0(@types/node@20.12.12)
 
 packages:
 
@@ -920,8 +912,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
+  /debug@4.3.5:
+    resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -1175,7 +1167,7 @@ packages:
     resolution: {integrity: sha512-FldH9d+GsFzPAsyVrzvrkdGmXpysa4TRg5CyA4XCdKhMYk8s3H4JrlChoocAmzmeKzG7SmeYIO3NYWWFsvvfEQ==}
     dependencies:
       bundle-require: 4.1.0(esbuild@0.20.2)
-      debug: 4.3.4
+      debug: 4.3.5
       esbuild: 0.20.2
       jiti: 1.21.0
       tsx: 4.10.4
@@ -1763,7 +1755,7 @@ packages:
       bundle-require: 4.1.0(esbuild@0.19.12)
       cac: 6.7.14
       chokidar: 3.6.0
-      debug: 4.3.4
+      debug: 4.3.5
       esbuild: 0.19.12
       execa: 5.1.1
       globby: 11.1.0
@@ -1825,7 +1817,7 @@ packages:
     hasBin: true
     dependencies:
       cac: 6.7.14
-      debug: 4.3.4
+      debug: 4.3.5
       pathe: 1.1.2
       picocolors: 1.0.1
       vite: 5.2.11(@types/node@20.12.12)
@@ -1909,7 +1901,7 @@ packages:
       '@vitest/utils': 1.6.0
       acorn-walk: 8.3.2
       chai: 4.4.1
-      debug: 4.3.4
+      debug: 4.3.5
       execa: 8.0.1
       local-pkg: 0.5.0
       magic-string: 0.30.10
