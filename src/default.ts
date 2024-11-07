@@ -1,6 +1,6 @@
 import { type ReleaseConfig, type ReleaseContext, type ReleaseTask } from './types'
 import { releaseTypes, resolveVersion } from './version'
-import { run } from '@0x-jerry/utils/node'
+import { exec } from '@0x-jerry/utils/node'
 import { logger } from './utils/dev'
 import { resolveConfig } from './config'
 import path from 'path'
@@ -91,7 +91,7 @@ async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
       nextVersion,
       conf: config,
       run: async (cmd) => {
-        await run(cmd)
+        await exec(cmd)
       },
     }
 

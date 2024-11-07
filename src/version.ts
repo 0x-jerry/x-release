@@ -1,7 +1,7 @@
 import prompts, { type Choice } from 'prompts'
 import semver, { type ReleaseType } from 'semver'
 import assert from 'assert'
-import { run } from '@0x-jerry/utils/node'
+import { exec } from '@0x-jerry/utils/node'
 import { logger } from './utils/dev'
 
 export const releaseTypes: ReleaseType[] = [
@@ -82,14 +82,12 @@ export async function resolveVersion(opt: {
 
 async function detectNextVersionType(): Promise<semver.ReleaseType | false> {
   try {
-    const tag = await run('git describe --tags --abbrev=0', undefined, {
+    const tag = await exec('git describe --tags --abbrev=0', {
       collectOutput: true,
-      silent: true,
     })
 
-    const logs = await run(`git --no-pager log ${tag.trim()}..HEAD --pretty=oneline`, undefined, {
+    const logs = await exec(`git --no-pager log ${tag.trim()}..HEAD --pretty=oneline`, {
       collectOutput: true,
-      silent: true,
     })
 
     let type: ReleaseType = 'patch'
