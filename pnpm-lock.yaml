@@ -12,8 +12,8 @@ importers:
         specifier: ^0.1.5
         version: 0.1.5
       '@0x-jerry/utils':
-        specifier: ^3.0.2
-        version: 3.0.2
+        specifier: ^4.0.0
+        version: 4.0.1
       cac:
         specifier: ^6.7.14
         version: 6.7.14
@@ -58,19 +58,13 @@ importers:
         specifier: ^2.1.4
         version: 2.1.4(@types/node@22.9.0)
 
-  example:
-    devDependencies:
-      '@0x-jerry/x-release':
-        specifier: workspace:*
-        version: link:..
-
 packages:
 
   '@0x-jerry/load-pkg@0.1.5':
     resolution: {integrity: sha512-OsG9WZfCDzLaIC5t7HNHAYdpvZEf5efs/+fLEXsbOQr3IdZyMuWA27utAOsrNwTfl1BCgr6+r048ZyMd9YE72Q==}
 
-  '@0x-jerry/utils@3.0.2':
-    resolution: {integrity: sha512-tY1EfOS4T74ek31OqKL5mR4qQGqMI906TpHS4q3QYVdQ9r1UNPUlHRmnng5YhupVFC0A2k8FcLy9BkpYASBL+g==}
+  '@0x-jerry/utils@4.0.1':
+    resolution: {integrity: sha512-q//1rKmCtiFTakXQB+9BneZJsEVpK/LLKJ1XRlSfc4DcR92tObay1SNT7luZ47olx+1ofBwoCE99U87xNAH4cA==}
 
   '@antfu/utils@0.7.10':
     resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
@@ -875,8 +869,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.0.8:
-    resolution: {integrity: sha512-TcJPw+9RV9dibz1hHUzlLVy8N4X9TnwirAjrU08Juo6BNKggzVfP2ZJ/3ZUSq15Xl5i85i+Z89XBO90pB2PghQ==}
+  nanoid@5.0.9:
+    resolution: {integrity: sha512-Aooyr6MXU6HpvvWXKoVoXwKMs/KyVakWwg7xQfv5/S/RIgJMy0Ifa45H9qqYy7pTCszrHzP21Uk4PZq2HpEM8Q==}
     engines: {node: ^18 || >=20}
     hasBin: true
 
@@ -1185,10 +1179,10 @@ snapshots:
 
   '@0x-jerry/load-pkg@0.1.5': {}
 
-  '@0x-jerry/utils@3.0.2':
+  '@0x-jerry/utils@4.0.1':
     dependencies:
       fflate: 0.8.2
-      nanoid: 5.0.8
+      nanoid: 5.0.9
       picocolors: 1.1.1
 
   '@antfu/utils@0.7.10': {}
@@ -1796,7 +1790,7 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  nanoid@5.0.8: {}
+  nanoid@5.0.9: {}
 
   object-assign@4.1.1: {}
 
