@@ -28,7 +28,7 @@ importers:
         version: 2.4.2
       semver:
         specifier: ^7.6.3
-        version: 7.6.3
+        version: 7.7.1
       unconfig:
         specifier: ^0.6.0
         version: 0.6.0
@@ -57,12 +57,6 @@ importers:
       vitest:
         specifier: ^2.1.4
         version: 2.1.4(@types/node@22.9.0)
-
-  example:
-    devDependencies:
-      '@0x-jerry/x-release':
-        specifier: workspace:*
-        version: link:..
 
 packages:
 
@@ -959,8 +953,8 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
-  semver@7.6.3:
-    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
+  semver@7.7.1:
+    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -1871,7 +1865,7 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.24.4
       fsevents: 2.3.3
 
-  semver@7.6.3: {}
+  semver@7.7.1: {}
 
   shebang-command@2.0.0:
     dependencies:
