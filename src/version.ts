@@ -1,7 +1,7 @@
+import assert from 'node:assert'
+import { exec } from '@0x-jerry/utils/node'
 import prompts, { type Choice } from 'prompts'
 import semver, { type ReleaseType } from 'semver'
-import assert from 'assert'
-import { exec } from '@0x-jerry/utils/node'
 import { logger } from './utils/dev'
 
 export const releaseTypes: ReleaseType[] = [
@@ -34,18 +34,20 @@ export async function resolveVersion(opt: {
   assert(semver.valid(currentVersion), 'Current version is not valid')
 
   if (type) {
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     return semver.inc(currentVersion, type)!
   }
 
   if (nextVersion) {
     if (semver.valid(nextVersion)) {
       return nextVersion
-    } else {
-      console.log('Input version is not valid, please choose one:')
     }
+
+    console.log('Input version is not valid, please choose one:')
   }
 
   const options: Choice[] = releaseTypes.map((type) => {
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     const nextVersion = semver.inc(currentVersion, type, semverIdentifier)!
 
     return {
@@ -63,7 +65,9 @@ export async function resolveVersion(opt: {
 
   const recommendedNextVersionType = await detectNextVersionType()
 
-  const idx = recommendedNextVersionType ? releaseTypes.indexOf(recommendedNextVersionType) : 0
+  const idx = recommendedNextVersionType
+    ? releaseTypes.indexOf(recommendedNextVersionType)
+    : 0
 
   const answer = await prompts({
     type: 'select',
@@ -86,9 +90,12 @@ async function detectNextVersionType(): Promise<semver.ReleaseType | false> {
       collectOutput: true,
     })
 
-    const logs = await exec(`git --no-pager log ${tag.trim()}..HEAD --pretty=oneline`, {
-      collectOutput: true,
-    })
+    const logs = await exec(
+      `git --no-pager log ${tag.trim()}..HEAD --pretty=oneline`,
+      {
+        collectOutput: true,
+      },
+    )
 
     let type: ReleaseType = 'patch'
 
@@ -101,7 +108,9 @@ async function detectNextVersionType(): Promise<semver.ReleaseType | false> {
           if (seg.includes('!')) {
             type = 'major'
             return type
-          } else if (seg.includes('feat')) {
+          }
+
+          if (seg.includes('feat')) {
             type = 'minor'
           }
         }

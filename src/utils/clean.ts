@@ -1,6 +1,6 @@
-import { existsSync } from 'fs'
-import { readdir, rm, stat } from 'fs/promises'
-import path from 'path'
+import { existsSync } from 'node:fs'
+import path from 'node:path'
+import { readdir, rm, stat } from 'node:fs/promises'
 /**
  * clean folders that is inside of the `cwd` path, do not thing if it is outside of the `cwd` path
  * @param folders

@@ -46,6 +46,7 @@
     "unconfig": "^7.1.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@types/debug": "^4.1.12",
     "@types/node": "^22.13.8",
     "@types/prompts": "^2.4.9",

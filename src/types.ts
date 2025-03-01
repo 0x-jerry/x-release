@@ -52,9 +52,7 @@ export interface ReleaseContext {
   run: (cmd: string) => void | Promise<void>
 }
 
-export interface Task {
-  (ctx: ReleaseContext): void | Promise<void>
-}
+export type Task = (ctx: ReleaseContext) => void | Promise<void>
 
 export interface NamedTask {
   name: string

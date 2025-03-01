@@ -1,15 +1,15 @@
-import { type ReleaseConfig, type ReleaseContext, type ReleaseTask } from './types'
-import { releaseTypes, resolveVersion } from './version'
-import { exec } from '@0x-jerry/utils/node'
-import { logger } from './utils/dev'
-import { resolveConfig } from './config'
-import path from 'path'
-import pc from 'picocolors'
+import path from 'node:path'
 import { loadPkg } from '@0x-jerry/load-pkg'
+import { exec } from '@0x-jerry/utils/node'
 import type { CAC } from 'cac'
-import { defaultTasks, publishTask } from './internalReleaseTask'
+import pc from 'picocolors'
 import type { ReleaseType } from 'semver'
+import { resolveConfig } from './config'
 import { runTasks } from './helper'
+import { defaultTasks, publishTask } from './internalReleaseTask'
+import type { ReleaseConfig, ReleaseContext, ReleaseTask } from './types'
+import { logger } from './utils/dev'
+import { releaseTypes, resolveVersion } from './version'
 
 const taskDescribe = `the tasks to run.
 
@@ -48,7 +48,7 @@ export const install = (cac: CAC) => {
     .option('--tag <tag-tpl>', 'new tag format, default is: "v${version}"')
     .option(
       '--commit <commit-tpl>',
-      'the commit message template, default is: "chore: release v${version}"'
+      'the commit message template, default is: "chore: release v${version}"',
     )
     .action(action)
 }

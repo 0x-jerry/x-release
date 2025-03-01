@@ -1,5 +1,5 @@
-import { mkdir, readdir, rm, writeFile } from 'fs/promises'
-import path from 'path'
+import { mkdir, readdir, rm, writeFile } from 'node:fs/promises'
+import path from 'node:path'
 import { clean } from './clean'
 
 describe('clean', () => {

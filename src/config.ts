@@ -4,13 +4,6 @@ import { logger } from './utils/dev'
 
 const confFileName = 'release.conf'
 
-const defaultConfig: ReleaseConfig = {
-  publish: true,
-  tasks: [],
-  commit: 'chore: release ${prefix}v${version}',
-  tag: '${prefix}v${version}',
-}
-
 export async function getConf() {
   const res = await loadConfig<UserConfig>({
     sources: [
@@ -21,6 +14,7 @@ export async function getConf() {
       {
         files: 'package.json',
         extensions: [],
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         rewrite(config: any) {
           return config?.release
         },
@@ -32,18 +26,15 @@ export async function getConf() {
 }
 
 export async function resolveConfig(opt: UserConfig) {
-  const definedProps = (obj: UserConfig) =>
-    Object.fromEntries(Object.entries(obj).filter(([k, v]) => v !== undefined))
+  const configFile = await getConf()
 
-  const config: ReleaseConfig = Object.assign(
-    defaultConfig,
-    definedProps(await getConf()),
-    definedProps({
-      publish: opt.publish,
-      commit: opt.commit,
-      tag: opt.tag,
-    })
-  )
+  const config: ReleaseConfig = {
+    publish: opt.publish ?? configFile.publish ?? true,
+    tasks: configFile.tasks ?? [],
+    commit:
+      opt.commit ?? configFile.commit ?? 'chore: release ${prefix}v${version}',
+    tag: opt.tag ?? configFile.tag ?? '${prefix}v${version}',
+  }
 
   logger.log('resolve config:', config)
 
