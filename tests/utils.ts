@@ -51,7 +51,7 @@ export async function runInProjectDir(
     // biome-ignore lint/complexity/noUselessCatch: <explanation>
     throw error
   } finally {
-    await cleanTestProject(projectName)
     process.chdir(oldCwd)
+    await cleanTestProject(projectName)
   }
 }
