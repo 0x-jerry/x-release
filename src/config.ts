@@ -37,7 +37,7 @@ export async function resolveConfig(opt: UserConfig) {
     tag: opt.tag ?? configFile.tag ?? '${prefix}v${version}',
   }
 
-  logger.log('resolve config:', config)
+  logger.info('resolve config:', config)
 
   return config
 }

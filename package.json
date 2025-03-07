@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsx dev.ts",
+    "dev": "tsx src/cli.ts --debug",
     "release": "tsx src/cli.ts",
     "build": "tsup",
     "test": "vitest run",

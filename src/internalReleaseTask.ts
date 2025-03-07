@@ -71,7 +71,7 @@ export const defaultTasks: ReleaseTask[] = [
     name: 'npm publish',
     async task(ctx) {
       if (!ctx.conf.publish) {
-        logger.log('publish task skipped')
+        logger.info('publish task skipped')
         return
       }
 

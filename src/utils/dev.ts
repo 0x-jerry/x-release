@@ -8,11 +8,15 @@ export function createLogger(ns?: string) {
     return debug(name)
   }
 
-  return debug(`${name}:${ns}`)
+  return debug(name).extend(ns)
+}
+
+export function enableLogger() {
+  debug.enable(`${cliName},${cliName}:*`)
 }
 
 export const logger = {
-  log: createLogger(),
+  info: createLogger(),
   warn: createLogger('warn'),
   error: createLogger('error'),
 }

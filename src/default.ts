@@ -8,7 +8,7 @@ import { resolveConfig } from './config'
 import { runTasks } from './helper'
 import { defaultTasks } from './internalReleaseTask'
 import type { ReleaseConfig, ReleaseContext, ReleaseTask } from './types'
-import { logger } from './utils/dev'
+import { enableLogger, logger } from './utils/dev'
 import { releaseTypes, resolveVersion } from './version'
 
 const taskDescribe = `the tasks to run.
@@ -28,6 +28,8 @@ interface ReleaseCommandOption {
   prerelase?: boolean
   prerelease?: boolean
 
+  debug?: boolean
+
   publish?: boolean
   tag?: string
   commit?: string
@@ -45,6 +47,7 @@ export const install = (cac: CAC) => {
     .option('--premajor', 'auto-increment premajor version number')
     .option('--prerelease', 'auto-increment prerelease version number')
     .option('--publish', 'run npm publish, default is true')
+    .option('--debug', 'show debug logs, default is false')
     .option('--tag <tag-tpl>', 'new tag format, default is: "v${version}"')
     .option(
       '--commit <commit-tpl>',
@@ -54,14 +57,18 @@ export const install = (cac: CAC) => {
 }
 
 async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
-  logger.log('tasks: %o', newVersion)
-  logger.log('opt: %o', opt)
+  if (opt.debug) {
+    enableLogger()
+  }
+
+  logger.info('tasks: %o', newVersion)
+  logger.info('opt: %o', opt)
 
   const releaseType = (Object.keys(opt) as ReleaseType[])
     .filter((key) => releaseTypes.includes(key))
     .at(0)
 
-  logger.log('releaseType: %s', releaseType)
+  logger.info('releaseType: %s', releaseType)
 
   try {
     const pkg = await loadPkg(process.cwd())
@@ -76,7 +83,7 @@ async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
       nextVersion: newVersion,
     })
 
-    logger.log('next version is: %s', nextVersion)
+    logger.info('next version is: %s', nextVersion)
 
     const pkgDir = path.dirname(pkg.path)
 
