@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "ES2020",
     "module": "ESNext",
     "strict": true,
@@ -9,7 +8,13 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "outDir": "dist",
-    "types": ["vitest/globals"]
+    "types": [
+      "vitest/globals"
+    ]
   },
-  "include": ["src", "dev.ts"]
+  "include": [
+    "src",
+    "dev.ts",
+    "tests"
+  ]
 }
