@@ -7,23 +7,22 @@ export interface ReleaseConfig {
   publish: boolean
 
   /**
-   * run custom tasks after bump version
+   * Run custom tasks after bump version
+   * 
+   * @example ['npm run test', (ctx) => ctx.run(`npm run test`)]
+   * 
    */
   tasks: ReleaseTask[]
 
   /**
-   * Commit template, example:
-   *
-   * "chore: release v${version}"
+   * Commit template, supported vairables: version
    *
    * @default "chore: release v${version}"
    */
   commit: string
 
   /**
-   * Tag template, example:
-   *
-   * "scope@v${version}"
+   * Tag template, supported vairables: version
    *
    * @default "v${version}"
    */
@@ -35,6 +34,9 @@ export interface ReleaseConfig {
    */
   clean?: string[]
 
+  /**
+   * Run this task before git commit
+   */
   beforeCommit?: ReleaseTask
 }
 
