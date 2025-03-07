@@ -29,6 +29,7 @@ export async function resolveConfig(opt: UserConfig) {
   const configFile = await getConf()
 
   const config: ReleaseConfig = {
+    ...configFile,
     publish: opt.publish ?? configFile.publish ?? true,
     tasks: configFile.tasks ?? [],
     commit:
