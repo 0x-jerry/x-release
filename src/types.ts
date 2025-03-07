@@ -8,9 +8,9 @@ export interface ReleaseConfig {
 
   /**
    * Run custom tasks after bump version
-   * 
+   *
    * @example ['npm run test', (ctx) => ctx.run(`npm run test`)]
-   * 
+   *
    */
   tasks: ReleaseTask[]
 
@@ -29,8 +29,9 @@ export interface ReleaseConfig {
   tag: string
 
   /**
-   * clear those folder before run npm publish,
-   * only available when `publish` is true
+   * Clear those folders before run npm publish, only available when `publish` is true
+   *
+   * Only support relative path
    */
   clean?: string[]
 
@@ -38,6 +39,16 @@ export interface ReleaseConfig {
    * Run this task before git commit
    */
   beforeCommit?: ReleaseTask
+
+  /**
+   * Only for unit test
+   *
+   * @private
+   */
+  '~test'?: {
+    runner: ReleaseContext['run']
+    [key: string]: unknown
+  }
 }
 
 export type UserConfig = Partial<ReleaseConfig>

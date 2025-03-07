@@ -1,8 +1,9 @@
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { readdir, rm, stat } from 'node:fs/promises'
+
 /**
- * clean folders that is inside of the `cwd` path, do not thing if it is outside of the `cwd` path
+ * Clean folders that is inside of the `cwd` path, skip the folder that is outside the `cwd` path
  * @param folders
  * @param cwd
  */
@@ -31,7 +32,6 @@ export async function clean(folders: string[], cwd: string) {
 
     await cleanFolder(p)
   }
-  //
 }
 
 async function cleanFolder(folderPath: string) {

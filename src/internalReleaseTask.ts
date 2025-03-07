@@ -3,16 +3,7 @@ import { runTask } from './helper'
 import type { ReleaseTask } from './types'
 import { clean } from './utils/clean'
 import { renderString } from './utils/renderString'
-
-export const publishTask: ReleaseTask = {
-  name: 'npm publish',
-  async task(ctx) {
-    if (ctx.conf.clean) {
-      await clean(ctx.conf.clean, ctx.cwd)
-    }
-    await ctx.run('npm publish')
-  },
-}
+import { logger } from './utils/dev'
 
 export const defaultTasks: ReleaseTask[] = [
   {
@@ -74,6 +65,20 @@ export const defaultTasks: ReleaseTask[] = [
     async task(ctx) {
       await ctx.run('git push')
       await ctx.run('git push --tags')
+    },
+  },
+  {
+    name: 'npm publish',
+    async task(ctx) {
+      if (!ctx.conf.publish) {
+        logger.log('publish task skipped')
+        return
+      }
+
+      if (ctx.conf.clean) {
+        await clean(ctx.conf.clean, ctx.cwd)
+      }
+      await ctx.run('npm publish')
     },
   },
 ]

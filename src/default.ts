@@ -6,7 +6,7 @@ import pc from 'picocolors'
 import type { ReleaseType } from 'semver'
 import { resolveConfig } from './config'
 import { runTasks } from './helper'
-import { defaultTasks, publishTask } from './internalReleaseTask'
+import { defaultTasks } from './internalReleaseTask'
 import type { ReleaseConfig, ReleaseContext, ReleaseTask } from './types'
 import { logger } from './utils/dev'
 import { releaseTypes, resolveVersion } from './version'
@@ -79,10 +79,15 @@ async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
     logger.log('next version is: %s', nextVersion)
 
     const pkgDir = path.dirname(pkg.path)
+
     // change `process.cwd()`
     process.chdir(pkgDir)
 
-    const config: ReleaseConfig = await resolveConfig(opt)
+    const config: ReleaseConfig = await resolveConfig({
+      publish: opt.publish,
+      commit: opt.commit,
+      tag: opt.tag,
+    })
 
     const ctx: ReleaseContext = {
       cwd: pkgDir,
@@ -91,15 +96,12 @@ async function action(newVersion: string, opt: ReleaseCommandOption = {}) {
       nextVersion,
       conf: config,
       run: async (cmd) => {
-        await exec(cmd)
+        const runner = config['~test']?.runner || exec
+        await runner(cmd)
       },
     }
 
-    const tasks: ReleaseTask[] = [
-      ...defaultTasks,
-      ...(config.publish ? [publishTask] : []),
-      ...config.tasks,
-    ]
+    const tasks: ReleaseTask[] = [...defaultTasks, ...config.tasks]
 
     await runTasks(ctx, tasks)
   } catch (err) {
