@@ -31,7 +31,7 @@ importers:
         version: 7.7.1
       unconfig:
         specifier: ^7.3.0
-        version: 7.3.0
+        version: 7.3.2
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -74,9 +74,6 @@ packages:
 
   '@0x-jerry/utils@5.0.0':
     resolution: {integrity: sha512-F3TnKTJrCRCKe9FG0eWEVlgYDFusC6p0hePjyR7mKAgGj61/4lScng7Dj/ss2Fo2zJvH8qWv2G7fSvW45n7fQQ==}
-
-  '@antfu/utils@9.1.0':
-    resolution: {integrity: sha512-R+3bzxNN0ZscQg3ZVG7suqBTFP2dbdaCjKe5KY6hqNZimdyZ32KemotJPmoqQhKH28CqdgyXQGkWZlCGsGQmJw==}
 
   '@biomejs/biome@1.9.4':
     resolution: {integrity: sha512-1rkd7G70+o9KkTn5KLmDYXihGoTaIGO9PIIN2ZB7UJxFrWw04CZHPYiMRjYsaDvVV7hP1dYNRLxSANLaBFGpog==}
@@ -307,9 +304,9 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@quansync/fs@0.1.1':
-    resolution: {integrity: sha512-sx8J1O/+j2lqs8MvsEz6rs/6UAUpCb4fu7C6EqtMqzbS3CmqLkTDTOMK+DrWukvyUuHzl8DhMjfNJzQDTqfGJg==}
-    engines: {node: '>=20.18.0'}
+  '@quansync/fs@0.1.3':
+    resolution: {integrity: sha512-G0OnZbMWEs5LhDyqy2UL17vGhSVHkQIfVojMtEWVenvj0V5S84VBgy86kJIuNsGDp2p7sTKlpSIpBUWdC35OKg==}
+    engines: {node: '>=20.0.0'}
 
   '@rollup/rollup-android-arm-eabi@4.34.9':
     resolution: {integrity: sha512-qZdlImWXur0CFakn2BJ2znJOdqYZKiedEPEVNTBrpfPjc/YuTGcaYZcdmNFTkUj3DU0ZM/AElcM8Ybww3xVLzA==}
@@ -722,8 +719,8 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  quansync@0.2.8:
-    resolution: {integrity: sha512-4+saucphJMazjt7iOM27mbFCk+D9dd/zmgMDCzRZ8MEoBfYp7lAvoN38et/phRQF6wOPMy/OROBGgoWeSKyluA==}
+  quansync@0.2.10:
+    resolution: {integrity: sha512-t41VRkMYbkHyCYmOvx/6URnN80H7k4X0lLdBMGsz+maAwrJQYB1djpV6vHrQIBE0WBSGqhtEHrK9U3DWWH8v7A==}
 
   readdirp@4.1.2:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
@@ -867,8 +864,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  unconfig@7.3.0:
-    resolution: {integrity: sha512-UWYFZinVx2ZRE5Dzp2kI4xBkNC//veYakve1BeaAa7CNrf9TckEKlBiFUSrHOuoEDgu1URhNy219ZXsprIrvjQ==}
+  unconfig@7.3.2:
+    resolution: {integrity: sha512-nqG5NNL2wFVGZ0NA/aCFw0oJ2pxSf1lwg4Z5ill8wd7K4KX/rQbHlwbh+bjctXL5Ly1xtzHenHGOK0b+lG6JVg==}
 
   undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
@@ -984,8 +981,6 @@ snapshots:
       fflate: 0.8.2
       nanoid: 5.1.2
       picocolors: 1.1.1
-
-  '@antfu/utils@9.1.0': {}
 
   '@biomejs/biome@1.9.4':
     optionalDependencies:
@@ -1126,9 +1121,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@quansync/fs@0.1.1':
+  '@quansync/fs@0.1.3':
     dependencies:
-      quansync: 0.2.8
+      quansync: 0.2.10
 
   '@rollup/rollup-android-arm-eabi@4.34.9':
     optional: true
@@ -1473,7 +1468,7 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  quansync@0.2.8: {}
+  quansync@0.2.10: {}
 
   readdirp@4.1.2: {}
 
@@ -1627,13 +1622,12 @@ snapshots:
 
   typescript@5.8.2: {}
 
-  unconfig@7.3.0:
+  unconfig@7.3.2:
     dependencies:
-      '@antfu/utils': 9.1.0
-      '@quansync/fs': 0.1.1
+      '@quansync/fs': 0.1.3
       defu: 6.1.4
       jiti: 2.4.2
-      quansync: 0.2.8
+      quansync: 0.2.10
 
   undici-types@6.20.0: {}
 
