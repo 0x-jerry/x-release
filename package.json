@@ -39,21 +39,21 @@
     "@0x-jerry/load-pkg": "^0.1.5",
     "@0x-jerry/utils": "^5.0.0",
     "cac": "^6.7.14",
-    "debug": "^4.4.0",
+    "debug": "^4.4.3",
     "picocolors": "^1.1.1",
     "prompts": "^2.4.2",
-    "semver": "^7.7.1",
-    "unconfig": "^7.3.0"
+    "semver": "^7.7.3",
+    "unconfig": "^7.4.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.3.6",
     "@types/debug": "^4.1.12",
-    "@types/node": "^22.13.9",
+    "@types/node": "^24.10.1",
     "@types/prompts": "^2.4.9",
-    "@types/semver": "^7.5.8",
-    "tsup": "^8.4.0",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.2",
-    "vitest": "^3.0.8"
+    "@types/semver": "^7.7.1",
+    "tsup": "^8.5.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.10"
   }
 }
