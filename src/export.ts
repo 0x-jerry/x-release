@@ -1,6 +1,6 @@
 import type { UserConfig } from './types'
 
-export type { UserConfig }
+export type * from './types'
 
 /**
  *
