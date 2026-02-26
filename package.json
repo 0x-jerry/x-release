@@ -6,6 +6,17 @@
   "types": "dist/export.d.ts",
   "type": "module",
   "license": "MIT",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0x-jerry/x-release.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0x-jerry/x-release/issues"
+  },
+  "homepage": "https://github.com/0x-jerry/x-release#readme",
   "bin": {
     "x-release": "dist/cli.js"
   },
