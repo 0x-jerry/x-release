@@ -25,7 +25,6 @@ describe('e2e', () => {
         'git tag "test@v1.0.1"',
         'git push',
         'git push --tags',
-        'npm publish',
         'done',
       ])
     })
