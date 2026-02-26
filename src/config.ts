@@ -26,15 +26,15 @@ export async function getConf() {
 }
 
 export async function resolveConfig(opt: UserConfig) {
-  const configFile = await getConf()
+  const configFileConfig = await getConf()
 
   const config: ReleaseConfig = {
-    ...configFile,
-    publish: opt.publish ?? configFile.publish ?? true,
-    tasks: configFile.tasks ?? [],
+    ...configFileConfig,
+    publish: opt.publish ?? configFileConfig.publish ?? false,
+    tasks: configFileConfig.tasks ?? [],
     commit:
-      opt.commit ?? configFile.commit ?? 'chore: release ${prefix}v${version}',
-    tag: opt.tag ?? configFile.tag ?? '${prefix}v${version}',
+      opt.commit ?? configFileConfig.commit ?? 'chore: release ${prefix}v${version}',
+    tag: opt.tag ?? configFileConfig.tag ?? '${prefix}v${version}',
   }
 
   logger.info('resolve config:', config)

@@ -2,7 +2,7 @@ import type { PackageFile } from '@0x-jerry/load-pkg'
 
 export interface ReleaseConfig {
   /**
-   * @default true
+   * @default false
    */
   publish: boolean
 
