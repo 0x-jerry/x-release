@@ -15,7 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
       - uses: oven-sh/setup-bun@v2
       - run: bun i
 
-      - run: bunx npm publish --provenance
+      - run: npm publish --provenance
