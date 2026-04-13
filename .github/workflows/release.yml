@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -15,13 +15,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6
-        with:
-          node-version: latest
-
       - name: Generate Release Note
-        run: npx changelogithub --output GEN_CHANGELOG.md
-      
+        run: bunx changelogithub --output GEN_CHANGELOG.md
+
       - uses: softprops/action-gh-release@v2
         with:
           body_path: GEN_CHANGELOG.md
