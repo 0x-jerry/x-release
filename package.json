@@ -2,8 +2,6 @@
   "name": "@0x-jerry/x-release",
   "description": "A convenient tool that helps you to create a new release.",
   "version": "3.0.1",
-  "main": "dist/export.js",
-  "types": "dist/export.d.ts",
   "type": "module",
   "license": "MIT",
   "directories": {
@@ -18,53 +16,46 @@
   },
   "homepage": "https://github.com/0x-jerry/x-release#readme",
   "bin": {
-    "x-release": "dist/cli.js"
+    "x-release": "dist/cli.mjs"
+  },
+  "exports": {
+    ".": "./dist/export.mjs",
+    "./cli": "./dist/cli.mjs",
+    "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "files": [
-    "src",
     "dist"
   ],
   "scripts": {
     "dev": "tsx src/cli.ts --debug",
     "release": "tsx src/cli.ts",
-    "build": "tsup",
+    "build": "tsdown",
     "test": "vitest run",
     "prepublishOnly": "npm run build"
   },
-  "tsup": {
-    "entry": [
-      "src/cli.ts",
-      "src/export.ts"
-    ],
-    "dts": true,
-    "clean": true,
-    "format": [
-      "esm"
-    ]
-  },
   "dependencies": {
     "@0x-jerry/load-pkg": "^0.1.5",
-    "@0x-jerry/utils": "^5.0.0",
-    "cac": "^6.7.14",
+    "@0x-jerry/utils": "^6.4.2",
+    "cac": "^7.0.0",
     "debug": "^4.4.3",
     "picocolors": "^1.1.1",
     "prompts": "^2.4.2",
-    "semver": "^7.7.3",
-    "unconfig": "^7.4.1"
+    "semver": "^7.7.4",
+    "unconfig": "^7.5.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.6",
-    "@types/debug": "^4.1.12",
-    "@types/node": "^24.10.1",
+    "@types/debug": "^4.1.13",
+    "@types/node": "^25.6.0",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
-    "tsup": "^8.5.1",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.10"
+    "oxfmt": "^0.44.0",
+    "tsdown": "^0.21.7",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
   }
 }

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { CAC } from 'cac'
 import { version } from '../package.json'
 import { install } from './default'
